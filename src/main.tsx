@@ -5,6 +5,7 @@ import "./static/css/index.css";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import { AppContextProvider } from "./context/AppContext";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -29,7 +30,9 @@ ReactDOM.render(
       }}
     />
     <Router>
-      <App />
+      <AppContextProvider>
+        <App />
+      </AppContextProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")
