@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 interface AppContextInterface {
-  user: StorageUser;
+  user: StorageUser | null;
   isLoggedIn: boolean;
   isLoading: boolean;
   error: any;
@@ -14,17 +14,18 @@ interface AppContextInterface {
   handleError: (isLoading: string) => void;
   handleRegister: ({}: RegisterInfo) => Promise<void>;
   handleLogin: ({}: LoginInfo) => Promise<void>;
+  handleLogout: () => void;
 }
 
 // create a new context file for the app
 const AppContext = createContext<AppContextInterface | null>(null);
 
-const getUserFromSessionStorage = (): StorageUser => {
+const getUserFromSessionStorage = (): StorageUser | null => {
   const user = sessionStorage.getItem("user");
   return user ? JSON.parse(user) : null;
 };
 
-const syncUserToSessionStorage = (user: StorageUser) => {
+const syncUserToSessionStorage = (user: StorageUser | null) => {
   if (user) {
     sessionStorage.setItem("user", JSON.stringify(user));
   } else {
@@ -125,6 +126,15 @@ const AppContextProvider = ({ children }: PropsWithChildren<{}>) => {
     }
   };
 
+  const handleLogout = () => {
+    setState({
+      ...state,
+      user: null,
+      isLoggedIn: false,
+    });
+    syncUserToSessionStorage(null);
+  };
+
   const handleError = (error: any) => {
     setState({
       ...state,
@@ -147,6 +157,7 @@ const AppContextProvider = ({ children }: PropsWithChildren<{}>) => {
         handleError,
         handleRegister,
         handleLogin,
+        handleLogout,
       }}
     >
       {children}
