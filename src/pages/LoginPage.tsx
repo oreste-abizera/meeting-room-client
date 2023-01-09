@@ -63,7 +63,7 @@ const LoginPage = (props: Props) => {
             ></input>
 
             <div className="flex w-auto justify-between mb-[30px]">
-              <div className="flex">
+              <div className="flex items-center">
                 <input
                   type="checkbox"
                   className="mr-[8px] w-[14px] h-[14px]"
@@ -84,7 +84,7 @@ const LoginPage = (props: Props) => {
               <span className="text-black mr-[8px]">
                 Don't have an account?
               </span>
-              <span className="text-black font-[500] cursor-pointer">
+              <span className="text-black font-[500] cursor-pointer underline">
                 Sign up for free
               </span>
             </p>
