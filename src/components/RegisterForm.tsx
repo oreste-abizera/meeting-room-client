@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 type Props = {};
 
 const RegisterForm = (props: Props) => {
+  const navigate = useNavigate();
   return (
     <form>
       <div className="w-full flex flex-wrap justify-between mb-[10px]">
@@ -77,7 +79,10 @@ const RegisterForm = (props: Props) => {
       </button>
       <div className="flex items-center">
         <span className="text-black mr-[8px]">Already have an account?</span>
-        <span className="text-black font-[500] cursor-pointer underline">
+        <span
+          className="text-black font-[500] cursor-pointer underline"
+          onClick={() => navigate("/")}
+        >
           Log in
         </span>
       </div>

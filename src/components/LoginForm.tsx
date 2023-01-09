@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 type Props = {};
 
 const LoginForm = (props: Props) => {
+  const navigate = useNavigate();
   return (
     <form>
       <input
@@ -33,7 +35,10 @@ const LoginForm = (props: Props) => {
       </button>
       <p>
         <span className="text-black mr-[8px]">Don't have an account?</span>
-        <span className="text-black font-[500] cursor-pointer underline">
+        <span
+          className="text-black font-[500] cursor-pointer underline"
+          onClick={() => navigate("/register")}
+        >
           Sign up for free
         </span>
       </p>
