@@ -1,2 +1,3 @@
-"# frontend-service" 
-"# react-ts-vite-tailwind-jit" 
+# frontend-service
+
+MeetingRoom Frontend Service
