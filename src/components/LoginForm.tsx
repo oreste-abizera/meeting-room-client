@@ -16,7 +16,7 @@ const LoginForm = (props: Props) => {
         placeholder="Password"
       ></input>
 
-      <div className="flex w-auto justify-between mb-[30px]">
+      <div className="flex w-auto justify-between mb-[25px]">
         <div className="flex items-center">
           <input type="checkbox" className="mr-[8px] w-[14px] h-[14px]"></input>
           <p className="text-black text-[15px] leading-[19px] ">
