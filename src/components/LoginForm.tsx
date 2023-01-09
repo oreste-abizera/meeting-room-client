@@ -1,21 +1,52 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../context/AppContext";
+import { LoginInfo } from "../types";
 
 type Props = {};
 
 const LoginForm = (props: Props) => {
   const navigate = useNavigate();
+
+  const { handleLogin, isLoggedIn, isLoading } = useContext(AppContext) || {};
+
+  const [loginDetails, setLoginDetails] = useState<LoginInfo>({
+    email: "",
+    password: "",
+  });
+  const handleInputChange = (event: any) => {
+    const { name, value } = event.target;
+    setLoginDetails({
+      ...loginDetails,
+      [name]: value,
+    });
+  };
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    handleLogin?.(loginDetails);
+  };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/dashboard");
+    }
+  }, [isLoggedIn]);
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <input
         type="email"
         className="w-full py-[11px] mb-[15px] h-[48px] border-[#E0E0E0] border-b-[1px] outline-none text-black text-[20px] leading-[26px] placeholder:text-black placeholder:text-[20px] placeholder:leading-[26px]"
         placeholder="Email"
+        name="email"
+        onChange={handleInputChange}
       ></input>
       <input
         type="password"
         className="w-full py-[11px] mb-[17px] h-[48px] border-[#E0E0E0] border-b-[1px] outline-none text-black text-[20px] leading-[26px] placeholder:text-black placeholder:text-[20px] placeholder:leading-[26px]"
         placeholder="Password"
+        name="password"
+        onChange={handleInputChange}
       ></input>
 
       <div className="flex w-auto justify-between mb-[25px]">

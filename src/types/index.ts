@@ -20,3 +20,8 @@ export interface RegisterInfo {
   password: String;
   confirmPassword: String;
 }
+
+export interface LoginInfo {
+  email: String;
+  password: String;
+}

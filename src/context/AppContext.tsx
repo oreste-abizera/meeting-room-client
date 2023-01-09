@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext, PropsWithChildren, useState } from "react";
 import url from "../helpers/url";
-import { RegisterInfo, StorageUser, User } from "../types";
+import { LoginInfo, RegisterInfo, StorageUser, User } from "../types";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -9,10 +9,11 @@ interface AppContextInterface {
   user: StorageUser;
   isLoggedIn: boolean;
   isLoading: boolean;
-  error: String;
+  error: any;
   handleLoading: (isLoading: boolean) => void;
   handleError: (isLoading: string) => void;
   handleRegister: ({}: RegisterInfo) => Promise<void>;
+  handleLogin: ({}: LoginInfo) => Promise<void>;
 }
 
 // create a new context file for the app
@@ -36,10 +37,47 @@ const AppContextProvider = ({ children }: PropsWithChildren<{}>) => {
     user: getUserFromSessionStorage(),
     isLoggedIn: getUserFromSessionStorage() !== null,
     isLoading: false,
-    error: "",
+    error: null,
   });
 
   const navigate = useNavigate();
+
+  const handleLogin = async ({ email, password }: LoginInfo) => {
+    try {
+      handleLoading(true);
+      let response = await axios.post(url + "/auth/login", {
+        email,
+        password,
+      });
+      if (response.data.success) {
+        let user: StorageUser = {
+          info: response.data.data,
+          token: response.data.token,
+        };
+        setState({
+          ...state,
+          user,
+          isLoggedIn: true,
+        });
+        syncUserToSessionStorage(user);
+        toast.success("Login successful");
+      }
+    } catch (error: any) {
+      console.log(error);
+      handleError(
+        error?.response?.data?.error ||
+          error?.response?.data?.message ||
+          "Something went wrong"
+      );
+      toast.error(
+        error?.response?.data?.error ||
+          error?.response?.data?.message ||
+          "Something went wrong"
+      );
+    } finally {
+      handleLoading(false);
+    }
+  };
 
   const handleRegister = async ({
     firstName,
@@ -87,7 +125,7 @@ const AppContextProvider = ({ children }: PropsWithChildren<{}>) => {
     }
   };
 
-  const handleError = (error: string) => {
+  const handleError = (error: any) => {
     setState({
       ...state,
       error,
@@ -103,7 +141,13 @@ const AppContextProvider = ({ children }: PropsWithChildren<{}>) => {
 
   return (
     <AppContext.Provider
-      value={{ ...state, handleLoading, handleError, handleRegister }}
+      value={{
+        ...state,
+        handleLoading,
+        handleError,
+        handleRegister,
+        handleLogin,
+      }}
     >
       {children}
     </AppContext.Provider>
