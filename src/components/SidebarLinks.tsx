@@ -5,6 +5,7 @@ import {
   FaDoorOpen,
   FaUsers,
   FaCog,
+  FaSignOutAlt,
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
@@ -16,32 +17,32 @@ const SidebarLinks = (props: Props) => {
     {
       name: "Dashboard",
       icon: <FaHome />,
-      link: "/dashboard",
       url: "/dashboard",
     },
     {
       name: "Bookings",
       icon: <FaCalendarAlt />,
-      link: "/bookings",
       url: "/bookings",
     },
     {
       name: "Buildings",
       icon: <FaDoorOpen />,
-      link: "/buildings",
       url: "/buildings",
     },
     {
       name: "Users",
       icon: <FaUsers />,
-      link: "/users",
       url: "/users",
     },
     {
       name: "Settings",
       icon: <FaCog />,
-      link: "/settings",
       url: "/settings",
+    },
+    {
+      name: "Logout",
+      icon: <FaSignOutAlt />,
+      url: "/logout",
     },
   ];
   return (
@@ -54,7 +55,7 @@ const SidebarLinks = (props: Props) => {
             className={`relative flex items-center pl-[32px] cursor-pointer sidebar-link h-[56px] ${
               active ? "active bg-[#9FA2B4] bg-opacity-[0.08]" : ""
             } hover:bg-[#9FA2B4] hover:bg-opacity-[0.08]`}
-            onClick={() => navigate(link.link)}
+            onClick={() => navigate(link.url)}
           >
             <div className="divider absolute left-0 top-0 h-full w-[3px] bg-transparent"></div>
             {link.icon}

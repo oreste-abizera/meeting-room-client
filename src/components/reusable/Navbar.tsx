@@ -10,7 +10,7 @@ type Props = {
 const Navbar = ({ handleToggle }: Props) => {
   const lightMode = true;
   return (
-    <div className="py-[10px] px-2 lg:p-[30px] flex justify-between mb-[25px]">
+    <div className="py-[10px] px-2 lg:p-[30px] flex justify-between mb-[20px]">
       <div className="flex items-center">
         <FaBars
           className="mr-[16px] text-[#252733] text-[18px] lg:text-[24px] cursor-pointer lg:hidden"
