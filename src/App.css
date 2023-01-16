@@ -1,0 +1,3 @@
+.animated-sideview {
+  transition: left 1s ease-in-out;
+}
