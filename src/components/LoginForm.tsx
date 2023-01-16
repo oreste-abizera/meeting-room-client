@@ -30,7 +30,7 @@ const LoginForm = (props: Props) => {
     if (isLoggedIn) {
       navigate("/dashboard");
     }
-  }, [isLoggedIn]);
+  });
 
   return (
     <form onSubmit={handleSubmit}>

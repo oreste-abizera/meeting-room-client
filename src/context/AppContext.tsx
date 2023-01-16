@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, PropsWithChildren, useState } from "react";
+import { createContext, PropsWithChildren, useEffect, useState } from "react";
 import url from "../helpers/url";
 import { LoginInfo, RegisterInfo, StorageUser, User } from "../types";
 import { toast } from "react-hot-toast";
@@ -36,7 +36,7 @@ const syncUserToSessionStorage = (user: StorageUser | null) => {
 const AppContextProvider = ({ children }: PropsWithChildren<{}>) => {
   const [state, setState] = useState({
     user: getUserFromSessionStorage(),
-    isLoggedIn: getUserFromSessionStorage() !== null,
+    isLoggedIn: getUserFromSessionStorage()?.token ? true : false,
     isLoading: false,
     error: null,
   });
@@ -148,6 +148,12 @@ const AppContextProvider = ({ children }: PropsWithChildren<{}>) => {
       isLoading,
     });
   };
+
+  useEffect(() => {
+    if (state.isLoggedIn) {
+      navigate("/dashboard");
+    }
+  }, [state.isLoggedIn]);
 
   return (
     <AppContext.Provider
