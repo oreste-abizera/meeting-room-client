@@ -1,3 +1,27 @@
 .animated-sideview {
   transition: left 1s ease-in-out;
 }
+
+.sidebar-link svg,
+.sidebar-link.active svg {
+  width: 18px;
+  height: 18px;
+  color: #9fa2b4;
+  opacity: 0.4;
+}
+
+.sidebar-link:hover svg,
+.sidebar-link.active svg {
+  color: #dde2ff;
+  opacity: 1;
+}
+
+.sidebar-link:hover p,
+.sidebar-link.active p {
+  color: #dde2ff;
+}
+
+.sidebar-link:hover .divider,
+.sidebar-link.active .divider {
+  background-color: #dde2ff;
+}
