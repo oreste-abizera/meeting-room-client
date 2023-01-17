@@ -1,13 +1,16 @@
-import React, { useContext, useEffect } from "react";
-import { AppContext } from "../context/AppContext";
 import DashboardLayout from "../layouts/DashboardLayout";
+import DashboardBanner from "../components/DashboardBanner";
+import StatisticsCards from "../components/StatisticsCards";
 
 type Props = {};
 
 const DashboardPage = (props: Props) => {
   return (
     <DashboardLayout>
-      <p className="px-4">Welcome!</p>
+      <div className="px-1 lg:px-4">
+        <DashboardBanner />
+        <StatisticsCards />
+      </div>
     </DashboardLayout>
   );
 };
