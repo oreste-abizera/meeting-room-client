@@ -149,12 +149,6 @@ const AppContextProvider = ({ children }: PropsWithChildren<{}>) => {
     });
   };
 
-  useEffect(() => {
-    if (state.isLoggedIn) {
-      navigate("/dashboard");
-    }
-  }, [state.isLoggedIn]);
-
   return (
     <AppContext.Provider
       value={{
