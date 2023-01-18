@@ -27,8 +27,8 @@ const StatisticsCards = (props: Props) => {
         "text-blue-500 dark:text-blue-100 bg-blue-100 dark:bg-blue-500",
     },
     {
-      title: "Total Rooms",
-      value: 12,
+      title: "Total Places",
+      value: 22,
       icon: <FaDoorOpen />,
       className:
         "text-teal-500 dark:text-teal-100 bg-teal-100 dark:bg-teal-500",
