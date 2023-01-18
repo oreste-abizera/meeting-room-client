@@ -6,6 +6,7 @@ import DashboardPage from "./pages/DashboardPage";
 import LogoutPage from "./pages/LogoutPage";
 import BuildingsPage from "./pages/BuildingsPage";
 import UsersPage from "./pages/UsersPage";
+import BookingsPage from "./pages/BookingsPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/dashboard" element={<DashboardPage />} />
       <Route path="/buildings" element={<BuildingsPage />} />
       <Route path="/users" element={<UsersPage />} />
+      <Route path="/bookings" element={<BookingsPage />} />
       <Route path="/logout" element={<LogoutPage />} />
     </Routes>
   );
