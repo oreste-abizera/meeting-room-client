@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   FaHome,
   FaCalendarAlt,
@@ -8,12 +8,14 @@ import {
   FaSignOutAlt,
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../context/AppContext";
 
 type Props = {};
 
 const SidebarLinks = (props: Props) => {
   const navigate = useNavigate();
-  const links = [
+  const { isAdmin } = useContext(AppContext);
+  let links = [
     {
       name: "Dashboard",
       icon: <FaHome />,
@@ -45,6 +47,11 @@ const SidebarLinks = (props: Props) => {
       url: "/logout",
     },
   ];
+
+  if (!isAdmin)
+    links = links.filter(
+      (link) => link.name !== "Users" && link.name !== "Buildings"
+    );
   return (
     <div className="mt-[25px]">
       {links.map((link, index) => {

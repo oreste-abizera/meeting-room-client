@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 interface AppContextInterface {
   user: StorageUser | null;
+  isAdmin: boolean;
   isLoggedIn: boolean;
   isLoading: boolean;
   error: any;
@@ -18,7 +19,7 @@ interface AppContextInterface {
 }
 
 // create a new context file for the app
-const AppContext = createContext<AppContextInterface | null>(null);
+const AppContext = createContext<AppContextInterface>(null!);
 
 export const getUserFromSessionStorage = (): StorageUser | null => {
   const user = sessionStorage.getItem("user");
@@ -153,6 +154,7 @@ const AppContextProvider = ({ children }: PropsWithChildren<{}>) => {
     <AppContext.Provider
       value={{
         ...state,
+        isAdmin: state.user?.info?.isAdmin ? true : false,
         handleLoading,
         handleError,
         handleRegister,

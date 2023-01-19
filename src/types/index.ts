@@ -4,6 +4,7 @@ export interface User {
   email: String;
   companyName: String;
   country: String;
+  isAdmin: Boolean;
 }
 
 export interface StorageUser {
