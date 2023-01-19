@@ -21,7 +21,7 @@ const PlacesPage = (props: Props) => {
         <div className="flex flex-row justify-end mb-4">
           <Button
             title="Add Place"
-            onClick={() => navigate(`buildings/${id}/places/new`)}
+            onClick={() => navigate(`/buildings/${id}/add-place`)}
           />
         </div>
         <PlacesList id={id || ""} />

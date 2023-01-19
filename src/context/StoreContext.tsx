@@ -22,6 +22,7 @@ interface StoreContextInterface {
   loadPlaces: () => void;
   loadBookings: () => void;
   addBuilding: (building: FormData) => void;
+  addPlace: (place: FormData) => void;
 }
 
 const StoreContext = createContext<StoreContextInterface>(null!);
@@ -82,6 +83,20 @@ export const StoreContextProvider = ({ children }: any) => {
     }
   };
 
+  const addPlace = async (place: FormData) => {
+    try {
+      const response = await (await axios.post(url + "/places", place)).data;
+      toast.success("Place added successfully");
+      navigate(`/buildings/${place.get("building")}/places`);
+    } catch (error: any) {
+      toast.error(
+        error.response?.data?.error ||
+          error.response?.data?.message ||
+          "Something went wrong"
+      );
+    }
+  };
+
   return (
     <StoreContext.Provider
       value={{
@@ -92,6 +107,7 @@ export const StoreContextProvider = ({ children }: any) => {
         loadBuildings,
         loadPlaces,
         addBuilding,
+        addPlace,
       }}
     >
       {children}
