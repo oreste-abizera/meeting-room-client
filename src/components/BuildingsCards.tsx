@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import StoreContext from "../context/StoreContext";
 
 type Props = {};
@@ -28,12 +29,12 @@ const BuildingsCards = (props: Props) => {
             <p className="text-purple-700 mb-2">
               {building.address} - {building.floors} floors
             </p>
-            <a
-              href="#"
+            <Link
+              to={`/buildings/${building._id}/places`}
               className="text-purple-600 hover:text-purple-500 underline text-sm"
             >
               View Places ▶
-            </a>
+            </Link>
           </div>
         </div>
       ))}
