@@ -20,7 +20,7 @@ interface AppContextInterface {
 // create a new context file for the app
 const AppContext = createContext<AppContextInterface | null>(null);
 
-const getUserFromSessionStorage = (): StorageUser | null => {
+export const getUserFromSessionStorage = (): StorageUser | null => {
   const user = sessionStorage.getItem("user");
   return user ? JSON.parse(user) : null;
 };

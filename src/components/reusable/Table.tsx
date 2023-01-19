@@ -17,7 +17,11 @@ const Table = ({ data, columns, showActions }: Props) => {
             <tr>
               <td className="px-4 py-3">ID</td>
               {columns.map((column, index) => {
-                return <td className="px-4 py-3">{column.Header}</td>;
+                return (
+                  <td className="px-4 py-3" key={index}>
+                    {column.Header}
+                  </td>
+                );
               })}
               {showActions && <td className="px-4 py-3">Actions</td>}
             </tr>
@@ -25,13 +29,13 @@ const Table = ({ data, columns, showActions }: Props) => {
           <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800 text-gray-700 dark:text-gray-400">
             {data.map((item, index) => {
               return (
-                <tr className="">
+                <tr className="" key={index}>
                   <td className="px-4 py-3">
                     <p className="font-semibold">{index + 1}</p>
                   </td>
                   {columns.map((column, index) => {
                     return (
-                      <td className="px-4 py-3">
+                      <td className="px-4 py-3" key={index}>
                         <p className="font-semibold">{item[column.accessor]}</p>
                       </td>
                     );

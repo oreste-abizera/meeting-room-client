@@ -25,3 +25,15 @@ export interface LoginInfo {
   email: String;
   password: String;
 }
+
+export type UserDTO = {
+  _id: String;
+  firstName: String;
+  lastName: String;
+  email: String;
+  companyName: String;
+  country: String;
+  createdAt: Date;
+  updatedAt: String;
+  __v: Number;
+};

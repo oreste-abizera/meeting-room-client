@@ -6,6 +6,7 @@ import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { AppContextProvider } from "./context/AppContext";
+import { StoreContextProvider } from "./context/StoreContext";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -31,7 +32,9 @@ ReactDOM.render(
     />
     <Router>
       <AppContextProvider>
-        <App />
+        <StoreContextProvider>
+          <App />
+        </StoreContextProvider>
       </AppContextProvider>
     </Router>
   </React.StrictMode>,

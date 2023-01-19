@@ -1,25 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
+import StoreContext from "../context/StoreContext";
 import Table from "./reusable/Table";
 
 type Props = {};
 
 const UsersList = (props: Props) => {
-  const data = [
-    {
-      names: "John Doe",
-      companyName: "Company 1",
-      email: "johndoe@gmail.com",
-      country: "Country 1",
-      creationDate: "2021-01-01",
-    },
-    {
-      names: "Jane Doe",
-      companyName: "Company 2",
-      email: "janedoe@gmail.com",
-      country: "Country 2",
-      creationDate: "2021-01-01",
-    },
-  ];
+  const { store } = useContext(StoreContext);
+  const data = (store?.users || []).map((user) => {
+    return {
+      ...user,
+      names: `${user.firstName} ${user.lastName}`,
+      creationDate: new Date(user.createdAt).toLocaleDateString(),
+    };
+  });
   const columns = [
     {
       Header: "Names",
