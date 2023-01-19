@@ -1,34 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaCalendarAlt, FaDoorOpen, FaUsers, FaBuilding } from "react-icons/fa";
+import StoreContext from "../context/StoreContext";
 
 type Props = {};
 
 const StatisticsCards = (props: Props) => {
+  const { store } = useContext(StoreContext);
+  const statistics = store?.statistics;
   const data = [
     {
       title: "Total Bookings",
-      value: 12,
+      value: statistics?.numberOfBookings || 0,
       icon: <FaCalendarAlt />,
       className:
         "text-orange-500 dark:text-orange-100 bg-orange-100 dark:bg-orange-500",
     },
     {
       title: "Total Users",
-      value: 12,
+      value: statistics?.numberOfUsers || 0,
       icon: <FaUsers />,
       className:
         "text-green-500 dark:text-green-100 bg-green-100 dark:bg-green-500",
     },
     {
       title: "Total Buildings",
-      value: 12,
+      value: statistics?.numberOfBuildings || 0,
       icon: <FaBuilding />,
       className:
         "text-blue-500 dark:text-blue-100 bg-blue-100 dark:bg-blue-500",
     },
     {
       title: "Total Places",
-      value: 22,
+      value: statistics?.numberOfPlaces || 0,
       icon: <FaDoorOpen />,
       className:
         "text-teal-500 dark:text-teal-100 bg-teal-100 dark:bg-teal-500",

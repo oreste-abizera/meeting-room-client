@@ -82,3 +82,10 @@ export type Booking = {
   updatedAt: Date;
   __v: Number;
 };
+
+export type Statistics = {
+  numberOfBookings: Number;
+  numberOfPlaces: Number;
+  numberOfBuildings: Number;
+  numberOfUsers: Number;
+};
