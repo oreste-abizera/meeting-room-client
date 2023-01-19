@@ -25,3 +25,11 @@
 .sidebar-link.active .divider {
   background-color: #dde2ff;
 }
+
+.form-input {
+  background-color: #fff;
+  border-color: #e2e8f0;
+  border-width: 1px;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
+}

@@ -2,6 +2,8 @@ import { createContext, useState } from "react";
 import { Booking, Building, Place, UserDTO } from "../types";
 import axios from "../helpers/axios";
 import url from "../helpers/url";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export interface Store {
   users: [UserDTO];
@@ -19,11 +21,13 @@ interface StoreContextInterface {
   loadBuildings: () => void;
   loadPlaces: () => void;
   loadBookings: () => void;
+  addBuilding: (building: FormData) => void;
 }
 
 const StoreContext = createContext<StoreContextInterface>(null!);
 
 export const StoreContextProvider = ({ children }: any) => {
+  const navigate = useNavigate();
   const [store, setStore] = useState<Store>(null!);
 
   const loadUsers = async () => {
@@ -62,6 +66,22 @@ export const StoreContextProvider = ({ children }: any) => {
     }
   };
 
+  const addBuilding = async (building: FormData) => {
+    try {
+      const response = await (
+        await axios.post(url + "/buildings", building)
+      ).data;
+      toast.success("Building added successfully");
+      navigate("/buildings");
+    } catch (error: any) {
+      toast.error(
+        error.response?.data?.error ||
+          error.response?.data?.message ||
+          "Something went wrong"
+      );
+    }
+  };
+
   return (
     <StoreContext.Provider
       value={{
@@ -71,6 +91,7 @@ export const StoreContextProvider = ({ children }: any) => {
         loadBookings,
         loadBuildings,
         loadPlaces,
+        addBuilding,
       }}
     >
       {children}

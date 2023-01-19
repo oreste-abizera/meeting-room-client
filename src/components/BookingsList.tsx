@@ -16,6 +16,7 @@ const BookingsList = (props: Props) => {
       creationDate: new Date(booking.createdAt).toLocaleDateString(),
     };
   });
+
   const columns = [
     {
       Header: "Names",

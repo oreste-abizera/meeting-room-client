@@ -7,6 +7,7 @@ import LogoutPage from "./pages/LogoutPage";
 import BuildingsPage from "./pages/BuildingsPage";
 import UsersPage from "./pages/UsersPage";
 import BookingsPage from "./pages/BookingsPage";
+import AddBuildingPage from "./pages/AddBuildingPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/dashboard" element={<DashboardPage />} />
       <Route path="/buildings" element={<BuildingsPage />} />
+      <Route path="/buildings/new" element={<AddBuildingPage />} />
       <Route path="/users" element={<UsersPage />} />
       <Route path="/bookings" element={<BookingsPage />} />
       <Route path="/logout" element={<LogoutPage />} />

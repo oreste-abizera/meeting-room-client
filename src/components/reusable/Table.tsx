@@ -3,7 +3,11 @@ import DeleteIcon from "../IconButtons/DeleteIcon";
 import EditIcon from "../IconButtons/EditIcon";
 
 type Props = {
-  columns: Array<{ Header: string; accessor: string }>;
+  columns: Array<{
+    Header: string;
+    accessor: string;
+    customCell?: (row: any) => void;
+  }>;
   data: Array<any>;
   showActions?: boolean;
 };
@@ -36,7 +40,13 @@ const Table = ({ data, columns, showActions }: Props) => {
                   {columns.map((column, index) => {
                     return (
                       <td className="px-4 py-3" key={index}>
-                        <p className="font-semibold">{item[column.accessor]}</p>
+                        {column.customCell ? (
+                          column.customCell(item)
+                        ) : (
+                          <p className="font-semibold">
+                            {item[column.accessor]}
+                          </p>
+                        )}
                       </td>
                     );
                   })}
