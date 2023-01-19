@@ -1,20 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
+import StoreContext from "../context/StoreContext";
 import Table from "./reusable/Table";
 
 type Props = {};
 
-const UsersList = (props: Props) => {
-  const data = [
-    {
-      names: "John Doe",
-      companyName: "Company 1",
-      place: "Place 1",
-      building: "Building 1",
-      floor: 1,
-      from: "2021-01-01",
-      to: "2021-01-01",
-    },
-  ];
+const BookingsList = (props: Props) => {
+  const { store } = useContext(StoreContext);
+  const data = (store?.bookings || []).map((booking) => {
+    return {
+      ...booking,
+      names: `${booking.user.firstName} ${booking.user.lastName}`,
+      companyName: booking.user.companyName,
+      place: booking.place.name,
+      building: booking.place.building?.name,
+      creationDate: new Date(booking.createdAt).toLocaleDateString(),
+    };
+  });
   const columns = [
     {
       Header: "Names",
@@ -38,14 +39,14 @@ const UsersList = (props: Props) => {
     },
     {
       Header: "From",
-      accessor: "from",
+      accessor: "startTime",
     },
     {
       Header: "To",
-      accessor: "to",
+      accessor: "endTime",
     },
   ];
   return <Table columns={columns} data={data} showActions={true}></Table>;
 };
 
-export default UsersList;
+export default BookingsList;

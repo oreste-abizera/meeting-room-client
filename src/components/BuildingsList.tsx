@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import StoreContext from "../context/StoreContext";
 import Table from "./reusable/Table";
 
 type Props = {};
 
 const BuildingsList = (props: Props) => {
-  const data = [
-    {
-      name: "Building 1",
-      address: "Address 1",
-      floors: 10,
-      creationDate: "2021-01-01",
-    },
-  ];
+  const { store } = useContext(StoreContext);
+  const data = (store?.buildings || []).map((building) => {
+    return {
+      ...building,
+      creationDate: new Date(building.createdAt).toLocaleDateString(),
+    };
+  });
   const columns = [
     {
       Header: "Name",
