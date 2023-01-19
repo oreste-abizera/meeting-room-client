@@ -8,6 +8,7 @@ import BuildingsPage from "./pages/BuildingsPage";
 import UsersPage from "./pages/UsersPage";
 import BookingsPage from "./pages/BookingsPage";
 import AddBuildingPage from "./pages/AddBuildingPage";
+import PlacesPage from "./pages/PlacesPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/dashboard" element={<DashboardPage />} />
       <Route path="/buildings" element={<BuildingsPage />} />
       <Route path="/buildings/new" element={<AddBuildingPage />} />
+      <Route path="/buildings/:id/places" element={<PlacesPage />} />
       <Route path="/users" element={<UsersPage />} />
       <Route path="/bookings" element={<BookingsPage />} />
       <Route path="/logout" element={<LogoutPage />} />

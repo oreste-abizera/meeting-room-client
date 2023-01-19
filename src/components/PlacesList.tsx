@@ -1,51 +1,52 @@
 import React, { useContext } from "react";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import StoreContext from "../context/StoreContext";
 import Table from "./reusable/Table";
 
-type Props = {};
+type Props = {
+  id: string;
+};
 
-const BuildingsList = (props: Props) => {
+const PlacesList = ({ id }: Props) => {
   const navigate = useNavigate();
   const { store } = useContext(StoreContext);
-  const data = (store?.buildings || []).map((building) => {
-    console.log(building.createdAt);
-    return {
-      ...building,
-      creationDate: new Date(building.createdAt).toLocaleDateString(),
-    };
-  });
+  const data = (store?.places || [])
+    .filter((place) => place.building._id === id)
+    .map((place) => {
+      return {
+        ...place,
+        creationDate: new Date(place.createdAt).toLocaleDateString(),
+      };
+    });
   const columns = [
     {
       Header: "Name",
       accessor: "name",
     },
     {
-      Header: "Address",
-      accessor: "address",
+      Header: "Location",
+      accessor: "location",
     },
     {
-      Header: "Floors",
-      accessor: "floors",
+      Header: "Floor",
+      accessor: "floor",
     },
     {
       Header: "Creation Date",
       accessor: "creationDate",
     },
     {
-      Header: "Places",
-      accessor: "places",
+      Header: "View",
+      accessor: "view",
       customCell: (row: any) => {
         return (
           <button
             className="align-bottom inline-flex items-center justify-center cursor-pointer leading-5 transition-colors duration-150 font-medium focus:outline-none p-2 rounded-lg text-white bg-purple-600 border border-transparent active:bg-purple-600 hover:bg-purple-700 focus:shadow-outline-purple"
             type="button"
-            onClick={() => {
-              navigate(`/buildings/${row._id}/places`);
-            }}
+            onClick={() => {}}
           >
-            <FaArrowRight className="h-3 w-3" />
+            <FaEye className="h-3 w-3" />
           </button>
         );
       },
@@ -54,4 +55,4 @@ const BuildingsList = (props: Props) => {
   return <Table columns={columns} data={data} showActions={true}></Table>;
 };
 
-export default BuildingsList;
+export default PlacesList;

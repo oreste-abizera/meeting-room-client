@@ -91,7 +91,6 @@ const BuildingForm = (props: Props) => {
         type={"text"}
         value={building.description}
         onChange={handleChange}
-        required={true}
       />
       <Input
         label={"Image"}
