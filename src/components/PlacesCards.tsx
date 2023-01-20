@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import StoreContext from "../context/StoreContext";
+import BookModal from "./BookModal";
 import Button from "./Button";
+import Modal from "./reusable/Modal";
 
 type Props = {
   id: string;
@@ -12,8 +14,19 @@ const PlacesCards = ({ id }: Props) => {
     (place) => place.building._id === id
   );
 
+  const [selectedPlace, setSelectedPlace] = React.useState<any>(null);
+
   return (
     <div className="px-1 lg:px-4 flex flex-wrap gap-y-4">
+      <Modal
+        visible={selectedPlace !== null}
+        onClose={() => setSelectedPlace(null)}
+      >
+        <BookModal
+          cancel={() => setSelectedPlace(null)}
+          place={selectedPlace}
+        />
+      </Modal>
       {data.map((place) => (
         <div
           className="flex w-full lg:w-[49%] lg:max-w-full"
@@ -44,7 +57,10 @@ const PlacesCards = ({ id }: Props) => {
               </p>
             </div>
             <div className="flex items-center">
-              <Button title="Book Now" />
+              <Button
+                title="Book Now"
+                onClick={() => setSelectedPlace(place)}
+              />
             </div>
           </div>
         </div>

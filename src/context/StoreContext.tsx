@@ -25,6 +25,7 @@ interface StoreContextInterface {
   addBuilding: (building: FormData) => void;
   addPlace: (place: FormData) => void;
   loadStatistics: () => void;
+  bookPlace: (booking: any) => void;
 }
 
 const StoreContext = createContext<StoreContextInterface>(null!);
@@ -112,6 +113,22 @@ export const StoreContextProvider = ({ children }: any) => {
     }
   };
 
+  const bookPlace = async (booking: any) => {
+    try {
+      const response = await (
+        await axios.post(url + "/bookings", booking)
+      ).data;
+      toast.success("Place booked successfully");
+      navigate(`/bookings`);
+    } catch (error: any) {
+      toast.error(
+        error.response?.data?.error ||
+          error.response?.data?.message ||
+          "Something went wrong"
+      );
+    }
+  };
+
   return (
     <StoreContext.Provider
       value={{
@@ -124,6 +141,7 @@ export const StoreContextProvider = ({ children }: any) => {
         addBuilding,
         addPlace,
         loadStatistics,
+        bookPlace,
       }}
     >
       {children}
