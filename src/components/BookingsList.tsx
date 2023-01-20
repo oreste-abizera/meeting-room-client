@@ -8,6 +8,7 @@ type Props = {};
 const BookingsList = (props: Props) => {
   const { store } = useContext(StoreContext);
   const { isAdmin } = useContext(AppContext);
+  const [activeTab, setActiveTab] = React.useState(1);
   const data = (store?.bookings || []).map((booking) => {
     return {
       ...booking,
@@ -35,10 +36,10 @@ const BookingsList = (props: Props) => {
       Header: "Place",
       accessor: "place",
     },
-    {
-      Header: "Building",
-      accessor: "building",
-    },
+    // {
+    //   Header: "Building",
+    //   accessor: "building",
+    // },
     {
       Header: "Floor",
       accessor: "floor",
@@ -71,7 +72,56 @@ const BookingsList = (props: Props) => {
       },
     },
   ];
-  return <Table columns={columns} data={data} showActions={isAdmin}></Table>;
+
+  const changeActiveTab = (index: number) => {
+    setActiveTab(index);
+  };
+
+  let displayedData = data.filter((booking) => {
+    if (activeTab === 1) {
+      return booking.status === "pending";
+    } else if (activeTab === 2) {
+      return booking.status === "approved";
+    } else if (activeTab === 3) {
+      return booking.status === "rejected";
+    }
+  });
+  return (
+    <>
+      <div className="flex mb-3 gap-2">
+        <button
+          className={`w-56 bg-white text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow ${
+            activeTab === 1 ? "bg-gray-200" : ""
+          }`}
+          onClick={() => changeActiveTab(1)}
+        >
+          Pending
+        </button>
+        <button
+          className={`w-56 bg-white text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow ${
+            activeTab === 2 ? "bg-gray-200" : ""
+          }`}
+          onClick={() => changeActiveTab(2)}
+        >
+          Approved
+        </button>
+        <button
+          className={`w-56 bg-white text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow ${
+            activeTab === 3 ? "bg-gray-200" : ""
+          }`}
+          onClick={() => changeActiveTab(3)}
+        >
+          Rejected
+        </button>
+      </div>
+
+      <Table
+        columns={columns}
+        data={displayedData}
+        showActions={isAdmin}
+      ></Table>
+    </>
+  );
 };
 
 export default BookingsList;
