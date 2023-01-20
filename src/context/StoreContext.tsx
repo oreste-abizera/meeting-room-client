@@ -26,6 +26,8 @@ interface StoreContextInterface {
   addPlace: (place: FormData) => void;
   loadStatistics: () => void;
   bookPlace: (booking: any) => void;
+  getCurrentUser: () => Promise<UserDTO>;
+  changeProfile: (user: FormData) => void;
 }
 
 const StoreContext = createContext<StoreContextInterface>(null!);
@@ -129,6 +131,29 @@ export const StoreContextProvider = ({ children }: any) => {
     }
   };
 
+  const getCurrentUser = async () => {
+    try {
+      const response = await (await axios.get(url + "/auth/me")).data;
+      return response.data;
+    } catch (error) {
+      return null;
+    }
+  };
+
+  const changeProfile = async (user: FormData) => {
+    try {
+      const response = await (await axios.put(url + "/auth/me", user)).data;
+      toast.success("Profile changed successfully");
+      navigate(`/profile`);
+    } catch (error: any) {
+      toast.error(
+        error.response?.data?.error ||
+          error.response?.data?.message ||
+          "Something went wrong"
+      );
+    }
+  };
+
   return (
     <StoreContext.Provider
       value={{
@@ -142,6 +167,8 @@ export const StoreContextProvider = ({ children }: any) => {
         addPlace,
         loadStatistics,
         bookPlace,
+        getCurrentUser,
+        changeProfile,
       }}
     >
       {children}

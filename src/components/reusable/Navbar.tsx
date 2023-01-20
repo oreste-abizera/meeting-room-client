@@ -35,7 +35,7 @@ const Navbar = ({ handleToggle }: Props) => {
         </p>
         <div className="w-[22px] h-[22px] lg:w-[44px] lg:h-[44px] border-[1.5px] border-[#DFE0EB] rounded-full flex items-center justify-center">
           <img
-            src={avatar}
+            src={user?.info?.profilePicture?.image_url || avatar}
             alt=""
             className="w-[20px] h-[20px] lg:w-[40px] lg:h-[40px] rounded-full bg-transparent"
           />

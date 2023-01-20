@@ -8,7 +8,7 @@ export interface User {
 }
 
 export interface StorageUser {
-  info: User;
+  info: UserDTO;
   token: String;
 }
 
@@ -36,6 +36,11 @@ export type UserDTO = {
   country: String;
   createdAt: Date;
   updatedAt: String;
+  profilePicture: {
+    image_url: String;
+    public_id: String;
+  };
+  isAdmin: Boolean;
   __v: Number;
 };
 

@@ -10,6 +10,7 @@ import BookingsPage from "./pages/BookingsPage";
 import AddBuildingPage from "./pages/AddBuildingPage";
 import PlacesPage from "./pages/PlacesPage";
 import AddPlacePage from "./pages/AddPlacePage";
+import UserSettingsPage from "./pages/UserSettingsPage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Route path="/buildings/:id/add-place" element={<AddPlacePage />} />
       <Route path="/users" element={<UsersPage />} />
       <Route path="/bookings" element={<BookingsPage />} />
+      <Route path="/settings" element={<UserSettingsPage />} />
       <Route path="/logout" element={<LogoutPage />} />
     </Routes>
   );
