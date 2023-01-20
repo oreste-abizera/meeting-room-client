@@ -6,9 +6,10 @@ import { AppContext } from "../context/AppContext";
 
 type Props = {
   children: React.ReactNode;
+  title?: string;
 };
 
-const DashboardLayout = ({ children }: Props) => {
+const DashboardLayout = ({ children, title }: Props) => {
   const navigate = useNavigate();
   const { isLoggedIn, user } = useContext(AppContext) || {};
 
@@ -39,7 +40,7 @@ const DashboardLayout = ({ children }: Props) => {
         <Sidebar />
       </div>
       <div className="w-full lg:w-[82.3%] h-full bg-[#F7F8FC]">
-        <Navbar handleToggle={handleToggle} />
+        <Navbar handleToggle={handleToggle} title={title} />
         {children}
       </div>
     </div>

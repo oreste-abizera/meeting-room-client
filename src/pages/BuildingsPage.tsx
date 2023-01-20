@@ -15,7 +15,7 @@ const BuildingsPage = (props: Props) => {
     loadBuildings();
   }, []);
   return (
-    <DashboardLayout>
+    <DashboardLayout title="Buildings">
       <div className="px-1 lg:px-4">
         <div className="flex flex-row justify-end mb-4">
           <Button

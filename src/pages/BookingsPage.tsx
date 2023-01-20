@@ -15,7 +15,7 @@ const BookingsPage = (props: Props) => {
     loadBookings();
   }, []);
   return (
-    <DashboardLayout>
+    <DashboardLayout title="Bookings">
       <div className="px-1 lg:px-4">
         <BookingsList />
       </div>

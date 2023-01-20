@@ -84,9 +84,9 @@ const Table = ({
               <tr>
                 <td
                   className="px-4 py-3 text-left"
-                  colSpan={columns.length + (showActions ? 2 : 0)}
+                  colSpan={columns.length + 1 + (showActions ? 1 : 0)}
                 >
-                  No data found
+                  No results found
                 </td>
               </tr>
             )}

@@ -14,7 +14,7 @@ const UserSettingsPage = (props: Props) => {
   const navigate = useNavigate();
 
   return (
-    <DashboardLayout>
+    <DashboardLayout title="Settings">
       <div className="px-1 lg:px-4">
         <h2 className="mb-4 text-lg font-semibold text-gray-600">
           Edit Profile

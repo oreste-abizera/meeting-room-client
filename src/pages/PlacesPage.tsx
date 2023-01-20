@@ -19,7 +19,7 @@ const PlacesPage = (props: Props) => {
     loadPlaces();
   }, []);
   return (
-    <DashboardLayout>
+    <DashboardLayout title="Places">
       {isAdmin ? (
         <div className="px-1 lg:px-4">
           <div className="flex flex-row justify-end mb-4">

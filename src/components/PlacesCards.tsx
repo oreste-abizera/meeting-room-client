@@ -65,6 +65,19 @@ const PlacesCards = ({ id }: Props) => {
           </div>
         </div>
       ))}
+
+      {data.length === 0 && (
+        <div className="flex w-full lg:w-[49%] lg:max-w-full">
+          <div className="flex-1 border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between">
+            <div className="mb-8">
+              <div className="text-gray-900 font-bold text-xl mb-2">
+                No places available
+              </div>
+              <p className="text-gray-700 text-base">Please try again later</p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

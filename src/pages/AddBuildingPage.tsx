@@ -12,9 +12,9 @@ const AddBuildingPage = (props: Props) => {
   const navigate = useNavigate();
 
   return (
-    <DashboardLayout>
+    <DashboardLayout title="Buildings">
       <div className="px-1 lg:px-4">
-        <h2 className="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+        <h2 className="mb-4 text-lg font-semibold text-gray-600">
           Add Building
         </h2>
         <BuildingForm />

@@ -20,7 +20,7 @@ const DashboardPage = (props: Props) => {
     }
   }, []);
   return (
-    <DashboardLayout>
+    <DashboardLayout title="Dashboard">
       <div className="px-1 lg:px-4">
         <DashboardBanner />
         {isAdmin ? <StatisticsCards /> : <BuildingsCards />}

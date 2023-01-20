@@ -6,9 +6,10 @@ import { AppContext } from "../../context/AppContext";
 
 type Props = {
   handleToggle: () => void;
+  title?: string;
 };
 
-const Navbar = ({ handleToggle }: Props) => {
+const Navbar = ({ handleToggle, title = "Overview" }: Props) => {
   const { isAdmin, user } = useContext(AppContext);
   const fullnames = user?.info?.firstName + " " + user?.info?.lastName;
   const lightMode = true;
@@ -20,7 +21,7 @@ const Navbar = ({ handleToggle }: Props) => {
           onClick={handleToggle}
         />
         <h1 className="text-[#252733] tracking-[0.3px] text-[18px] lg:text-[24px] leading-[30px] font-bold">
-          Overview
+          {title}
         </h1>
       </div>
       <div className="flex items-center">

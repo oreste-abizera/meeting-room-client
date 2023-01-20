@@ -11,7 +11,7 @@ const UsersPage = (props: Props) => {
     loadUsers();
   }, []);
   return (
-    <DashboardLayout>
+    <DashboardLayout title="Users">
       <div className="px-1 lg:px-4">
         <UsersList />
       </div>
