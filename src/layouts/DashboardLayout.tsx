@@ -19,7 +19,7 @@ const DashboardLayout = ({ children }: Props) => {
     }
   }, [isLoggedIn]);
 
-  const [isOpen, setIsOpen] = React.useState(true);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);

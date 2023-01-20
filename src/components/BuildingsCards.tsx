@@ -23,15 +23,15 @@ const BuildingsCards = (props: Props) => {
             className="rounded-t-lg h-60 w-full object-cover"
           />
           <div className="p-6">
-            <h2 className="font-bold mb-2 text-2xl text-purple-800">
+            <h2 className="font-bold mb-2 text-2xl text-[#252733]">
               {building.name}
             </h2>
-            <p className="text-purple-700 mb-2">
+            <p className="text-[#252733] mb-2">
               {building.address} - {building.floors} floors
             </p>
             <Link
               to={`/buildings/${building._id}/places`}
-              className="text-purple-600 hover:text-purple-500 underline text-sm"
+              className="text-[#252733] underline text-sm"
             >
               View Places ▶
             </Link>

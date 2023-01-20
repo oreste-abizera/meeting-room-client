@@ -39,7 +39,7 @@ const PlacesCards = ({ id }: Props) => {
           ></div>
           <div className="flex-1 border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
             <div className="mb-8">
-              <p className="text-sm text-gray-600 flex items-center">
+              <p className="text-xs text-gray-600 flex items-center">
                 <svg
                   className="fill-current text-gray-500 w-3 h-3 mr-2"
                   xmlns="http://www.w3.org/2000/svg"

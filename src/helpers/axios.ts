@@ -14,7 +14,6 @@ axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${
 }`;
 
 export const setAuthorizationToken = (token: string) => {
-  console.log(token);
   if (token) {
     axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   } else {

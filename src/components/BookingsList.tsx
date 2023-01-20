@@ -44,12 +44,31 @@ const BookingsList = (props: Props) => {
       accessor: "floor",
     },
     {
-      Header: "From",
+      Header: "Start time",
       accessor: "startTime",
     },
     {
-      Header: "To",
+      Header: "End Time",
       accessor: "endTime",
+    },
+    {
+      Header: "Status",
+      accessor: "status",
+      customCell: (row: any) => {
+        return (
+          <span
+            className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+              row.status === "approved"
+                ? "bg-green-100 text-green-800"
+                : row.status === "pending"
+                ? "bg-yellow-100 text-yellow-800"
+                : "bg-red-100 text-red-800"
+            }`}
+          >
+            {row.status}
+          </span>
+        );
+      },
     },
   ];
   return <Table columns={columns} data={data} showActions={isAdmin}></Table>;

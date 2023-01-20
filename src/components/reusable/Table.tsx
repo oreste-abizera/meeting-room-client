@@ -17,7 +17,7 @@ const Table = ({ data, columns, showActions }: Props) => {
     <div className="w-full overflow-hidden rounded-lg shadow-xs mb-8">
       <div className="w-full overflow-x-auto">
         <table className="w-full whitespace-no-wrap">
-          <thead className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+          <thead className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-600 bg-gray-50 dark:text-[#DDE2FF] dark:bg-[#363740]">
             <tr>
               <td className="px-4 py-3">ID</td>
               {columns.map((column, index) => {
@@ -30,7 +30,7 @@ const Table = ({ data, columns, showActions }: Props) => {
               {showActions && <td className="px-4 py-3">Actions</td>}
             </tr>
           </thead>
-          <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800 text-gray-700 dark:text-gray-400">
+          <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-[#363740] text-gray-700 dark:text-[#DDE2FF]">
             {data.map((item, index) => {
               return (
                 <tr className="" key={index}>
@@ -43,9 +43,7 @@ const Table = ({ data, columns, showActions }: Props) => {
                         {column.customCell ? (
                           column.customCell(item)
                         ) : (
-                          <p className="font-semibold">
-                            {item[column.accessor]}
-                          </p>
+                          <p className="">{item[column.accessor]}</p>
                         )}
                       </td>
                     );
