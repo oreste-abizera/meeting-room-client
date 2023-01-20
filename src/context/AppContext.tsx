@@ -4,6 +4,7 @@ import url from "../helpers/url";
 import { LoginInfo, RegisterInfo, StorageUser, User } from "../types";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { setAuthorizationToken } from "../helpers/axios";
 
 interface AppContextInterface {
   user: StorageUser | null;
@@ -56,12 +57,15 @@ const AppContextProvider = ({ children }: PropsWithChildren<{}>) => {
           info: response.data.data,
           token: response.data.token,
         };
-        setState({
-          ...state,
-          user,
-          isLoggedIn: true,
+        setState((state) => {
+          return {
+            ...state,
+            user,
+            isLoggedIn: true,
+          };
         });
         syncUserToSessionStorage(user);
+        setAuthorizationToken(user.token as string);
         toast.success("Login successful");
       }
     } catch (error: any) {
@@ -128,25 +132,32 @@ const AppContextProvider = ({ children }: PropsWithChildren<{}>) => {
   };
 
   const handleLogout = () => {
-    setState({
-      ...state,
-      user: null,
-      isLoggedIn: false,
+    setState((state) => {
+      return {
+        ...state,
+        user: null,
+        isLoggedIn: false,
+      };
     });
     syncUserToSessionStorage(null);
+    setAuthorizationToken("");
   };
 
   const handleError = (error: any) => {
-    setState({
-      ...state,
-      error,
+    setState((state) => {
+      return {
+        ...state,
+        error,
+      };
     });
   };
 
   const handleLoading = (isLoading: boolean) => {
-    setState({
-      ...state,
-      isLoading,
+    setState((state) => {
+      return {
+        ...state,
+        isLoading,
+      };
     });
   };
 

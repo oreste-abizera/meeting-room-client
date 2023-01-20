@@ -1,12 +1,25 @@
 import axios from "axios";
-import { getUserFromSessionStorage } from "../context/AppContext";
+import { StorageUser } from "../types";
 import url from "./url";
 
+let user = sessionStorage.getItem("user");
+let sessionUser: StorageUser = user ? JSON.parse(user) : null;
+
 const axiosInstance = axios.create({
-  url,
-  headers: {
-    Authorization: `Bearer ${getUserFromSessionStorage()?.token || null}`,
-  },
+  baseURL: url,
 });
+
+axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${
+  sessionUser?.token || null
+}`;
+
+export const setAuthorizationToken = (token: string) => {
+  console.log(token);
+  if (token) {
+    axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  } else {
+    delete axiosInstance.defaults.headers.common["Authorization"];
+  }
+};
 
 export default axiosInstance;

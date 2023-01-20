@@ -30,7 +30,7 @@ const LoginForm = (props: Props) => {
     if (isLoggedIn) {
       navigate("/dashboard");
     }
-  });
+  }, [isLoggedIn]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -60,9 +60,12 @@ const LoginForm = (props: Props) => {
 
       <button
         type="submit"
-        className="bg-[#060606] text-white rounded-[6px] w-full h-[60px] mb-[16px]"
+        disabled={isLoading}
+        className={`bg-[#060606] text-white rounded-[6px] w-full h-[60px] mb-[16px] ${
+          isLoading ? "opacity-[0.5] cursor-not-allowed" : ""
+        }`}
       >
-        Log in
+        {isLoading ? "Loading..." : "Log in"}
       </button>
       <p>
         <span className="text-black mr-[8px]">Don't have an account?</span>
