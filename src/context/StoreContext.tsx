@@ -31,6 +31,8 @@ interface StoreContextInterface {
   changeProfile: (user: FormData) => void;
   approveBooking: (bookingId: string) => void;
   rejectBooking: (bookingId: string) => void;
+  deleteBuilding: (buildingId: string) => void;
+  editBuilding: (buildingId: string, building: FormData) => void;
 }
 
 const StoreContext = createContext<StoreContextInterface>(null!);
@@ -205,6 +207,45 @@ export const StoreContextProvider = ({ children }: any) => {
     }
   };
 
+  const deleteBuilding = async (buildingId: string) => {
+    try {
+      handleLoading(true);
+      const response = await (
+        await axios.delete(url + "/buildings/" + buildingId)
+      ).data;
+      toast.success("Building deleted successfully");
+      loadBuildings();
+    } catch (error: any) {
+      toast.error(
+        error.response?.data?.error ||
+          error.response?.data?.message ||
+          "Something went wrong"
+      );
+    } finally {
+      handleLoading(false);
+    }
+  };
+
+  const editBuilding = async (buildingId: string, building: FormData) => {
+    try {
+      handleLoading(true);
+      const response = await (
+        await axios.put(url + "/buildings/" + buildingId, building)
+      ).data;
+      toast.success("Building edited successfully");
+      loadBuildings();
+      navigate(`/buildings`);
+    } catch (error: any) {
+      toast.error(
+        error.response?.data?.error ||
+          error.response?.data?.message ||
+          "Something went wrong"
+      );
+    } finally {
+      handleLoading(false);
+    }
+  };
+
   return (
     <StoreContext.Provider
       value={{
@@ -222,6 +263,8 @@ export const StoreContextProvider = ({ children }: any) => {
         changeProfile,
         approveBooking,
         rejectBooking,
+        deleteBuilding,
+        editBuilding,
       }}
     >
       {children}

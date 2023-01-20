@@ -8,9 +8,8 @@ type Props = {};
 
 const BuildingsList = (props: Props) => {
   const navigate = useNavigate();
-  const { store } = useContext(StoreContext);
+  const { store, deleteBuilding } = useContext(StoreContext);
   const data = (store?.buildings || []).map((building) => {
-    console.log(building.createdAt);
     return {
       ...building,
       creationDate: new Date(building.createdAt).toLocaleDateString(),
@@ -51,7 +50,24 @@ const BuildingsList = (props: Props) => {
       },
     },
   ];
-  return <Table columns={columns} data={data} showActions={true}></Table>;
+
+  const editHandler = (id: string) => {
+    navigate(`/buildings/${id}/edit`);
+  };
+
+  const deleteHandler = (id: string) => {
+    deleteBuilding(id);
+  };
+
+  return (
+    <Table
+      columns={columns}
+      data={data}
+      showActions={true}
+      handler1={editHandler}
+      handler2={deleteHandler}
+    ></Table>
+  );
 };
 
 export default BuildingsList;

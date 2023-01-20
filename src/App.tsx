@@ -11,6 +11,7 @@ import AddBuildingPage from "./pages/AddBuildingPage";
 import PlacesPage from "./pages/PlacesPage";
 import AddPlacePage from "./pages/AddPlacePage";
 import UserSettingsPage from "./pages/UserSettingsPage";
+import EditBuildingPage from "./pages/EditBuildingPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route path="/dashboard" element={<DashboardPage />} />
       <Route path="/buildings" element={<BuildingsPage />} />
       <Route path="/buildings/new" element={<AddBuildingPage />} />
+      <Route path="/buildings/:id/edit" element={<EditBuildingPage />} />
       <Route path="/buildings/:id/places" element={<PlacesPage />} />
       <Route path="/buildings/:id/add-place" element={<AddPlacePage />} />
       <Route path="/users" element={<UsersPage />} />

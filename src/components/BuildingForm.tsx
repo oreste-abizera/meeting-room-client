@@ -1,12 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import StoreContext from "../context/StoreContext";
+import { Building } from "../types";
 import Button from "./Button";
 import Input from "./reusable/Input";
 
-type Props = {};
+type Props = {
+  edit?: boolean;
+  id?: string;
+  building?: Building;
+};
 
-const BuildingForm = (props: Props) => {
-  const { addBuilding } = useContext(StoreContext);
+const BuildingForm = ({ edit, id, building: currentBuilding }: Props) => {
+  const { addBuilding, editBuilding, store } = useContext(StoreContext);
   const [file, setfile] = React.useState<string | ArrayBuffer | null>();
   const [photoFile, setPhotoFile] = React.useState<File | null>(null);
 
@@ -29,9 +34,13 @@ const BuildingForm = (props: Props) => {
     formData.append("address", building.address);
     formData.append("floors", building.floors + "");
     formData.append("description", building.description);
-    const photoToBlob = new Blob([photoFile || ""], { type: "image/jpeg" });
-    formData.append("picture", photoToBlob);
-    addBuilding(formData);
+    if (!edit) {
+      const photoToBlob = new Blob([photoFile || ""], { type: "image/jpeg" });
+      formData.append("picture", photoToBlob);
+      addBuilding(formData);
+    } else {
+      editBuilding(id || "", formData);
+    }
   };
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,6 +60,18 @@ const BuildingForm = (props: Props) => {
       reader.readAsDataURL(tempFile);
     }
   };
+
+  useEffect(() => {
+    if (edit) {
+      setBuilding({
+        name: (currentBuilding?.name as string) || "",
+        address: (currentBuilding?.address as string) || "",
+        floors: (currentBuilding?.floors as number) || 0,
+        description: (currentBuilding?.description as string) || "",
+        image: "",
+      });
+    }
+  }, [edit, currentBuilding]);
 
   return (
     <form
@@ -92,19 +113,21 @@ const BuildingForm = (props: Props) => {
         value={building.description}
         onChange={handleChange}
       />
-      <Input
-        label={"Image"}
-        placeholder={"Image of building"}
-        name={"image"}
-        type={"file"}
-        required={true}
-        onChange={handleFile}
-      />
+      {!edit && (
+        <Input
+          label={"Image"}
+          placeholder={"Image of building"}
+          name={"image"}
+          type={"file"}
+          required={true}
+          onChange={handleFile}
+        />
+      )}
 
       {file && <img className="h-32" src={file as string} alt="building" />}
 
-      <Button type="submit" className="mt-4">
-        Submit
+      <Button type="submit" className="mt-4" disabled={store?.isLoading}>
+        {store?.isLoading ? "Loading..." : edit ? "Save Changes" : "Submit"}
       </Button>
     </form>
   );
