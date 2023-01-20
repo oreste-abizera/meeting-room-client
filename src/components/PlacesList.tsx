@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { FaArrowRight, FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import StoreContext from "../context/StoreContext";
+import PlaceModal from "./PlaceModal";
+import Modal from "./reusable/Modal";
 import Table from "./reusable/Table";
 
 type Props = {
@@ -9,6 +11,8 @@ type Props = {
 };
 
 const PlacesList = ({ id }: Props) => {
+  const [selectedPlace, setselectedPlace] = React.useState(null);
+
   const navigate = useNavigate();
   const { store, deletePlace } = useContext(StoreContext);
   const data = (store?.places || [])
@@ -44,7 +48,9 @@ const PlacesList = ({ id }: Props) => {
           <button
             className="align-bottom inline-flex items-center justify-center cursor-pointer leading-5 transition-colors duration-150 font-medium focus:outline-none p-2 rounded-lg text-white bg-purple-600 border border-transparent active:bg-purple-600 hover:bg-purple-700 focus:shadow-outline-purple"
             type="button"
-            onClick={() => {}}
+            onClick={() => {
+              setselectedPlace(row);
+            }}
           >
             <FaEye className="h-3 w-3" />
           </button>
@@ -62,13 +68,24 @@ const PlacesList = ({ id }: Props) => {
   };
 
   return (
-    <Table
-      columns={columns}
-      data={data}
-      showActions={true}
-      handler1={editHandler}
-      handler2={deleteHandler}
-    ></Table>
+    <>
+      <Modal
+        visible={selectedPlace !== null}
+        onClose={() => setselectedPlace(null)}
+      >
+        <PlaceModal
+          close={() => setselectedPlace(null)}
+          place={selectedPlace}
+        />
+      </Modal>
+      <Table
+        columns={columns}
+        data={data}
+        showActions={true}
+        handler1={editHandler}
+        handler2={deleteHandler}
+      ></Table>
+    </>
   );
 };
 
