@@ -1,10 +1,9 @@
-import axios from "axios";
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
 import url from "../helpers/url";
 import { LoginInfo, RegisterInfo, StorageUser, User } from "../types";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { setAuthorizationToken } from "../helpers/axios";
+import axios, { setAuthorizationToken } from "../helpers/axios";
 
 interface AppContextInterface {
   user: StorageUser | null;
@@ -17,6 +16,7 @@ interface AppContextInterface {
   handleRegister: ({}: RegisterInfo) => Promise<void>;
   handleLogin: ({}: LoginInfo) => Promise<void>;
   handleLogout: () => void;
+  reloadUser: () => void;
 }
 
 // create a new context file for the app
@@ -161,6 +161,42 @@ const AppContextProvider = ({ children }: PropsWithChildren<{}>) => {
     });
   };
 
+  const reloadUser = async () => {
+    try {
+      handleLoading(true);
+      let response = await axios.get(url + "/auth/me");
+      if (response.data?.success) {
+        let user: StorageUser = {
+          info: response.data.data,
+          token: state.user?.token as string,
+        };
+        setState((state) => {
+          return {
+            ...state,
+            user,
+            isLoggedIn: true,
+          };
+        });
+        syncUserToSessionStorage(user);
+        setAuthorizationToken(user.token as string);
+      }
+    } catch (error: any) {
+      console.log(error);
+      handleError(
+        error?.response?.data?.error ||
+          error?.response?.data?.message ||
+          "Something went wrong"
+      );
+      toast.error(
+        error?.response?.data?.error ||
+          error?.response?.data?.message ||
+          "Something went wrong"
+      );
+    } finally {
+      handleLoading(false);
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -171,6 +207,7 @@ const AppContextProvider = ({ children }: PropsWithChildren<{}>) => {
         handleRegister,
         handleLogin,
         handleLogout,
+        reloadUser,
       }}
     >
       {children}

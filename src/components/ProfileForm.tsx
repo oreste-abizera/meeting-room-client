@@ -8,7 +8,7 @@ import { UserDTO } from "../types";
 type Props = {};
 
 const ProfileForm = (props: Props) => {
-  const { changeProfile, getCurrentUser } = useContext(StoreContext);
+  const { changeProfile, getCurrentUser, store } = useContext(StoreContext);
   const [file, setfile] = React.useState<string | ArrayBuffer | null>();
   const [photoFile, setPhotoFile] = React.useState<File | null>(null);
   const [currentImage, setCurrentImage] = React.useState<string>("");
@@ -118,8 +118,8 @@ const ProfileForm = (props: Props) => {
         onChange={handleChange}
       />
 
-      <Button type="submit" className="mt-4">
-        Submit
+      <Button type="submit" className="mt-4" disabled={store?.isLoading}>
+        {store?.isLoading ? "Wait..." : "Save"}
       </Button>
     </form>
   );

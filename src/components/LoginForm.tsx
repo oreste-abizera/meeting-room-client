@@ -65,7 +65,7 @@ const LoginForm = (props: Props) => {
           isLoading ? "opacity-[0.5] cursor-not-allowed" : ""
         }`}
       >
-        {isLoading ? "Loading..." : "Log in"}
+        {isLoading ? "Wait..." : "Log in"}
       </button>
       <p>
         <span className="text-black mr-[8px]">Don't have an account?</span>

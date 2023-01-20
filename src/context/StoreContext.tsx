@@ -1,9 +1,10 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { Booking, Building, Place, Statistics, UserDTO } from "../types";
 import axios from "../helpers/axios";
 import url from "../helpers/url";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "./AppContext";
 
 export interface Store {
   statistics: Statistics;
@@ -33,8 +34,15 @@ interface StoreContextInterface {
 const StoreContext = createContext<StoreContextInterface>(null!);
 
 export const StoreContextProvider = ({ children }: any) => {
+  const { reloadUser } = useContext(AppContext);
   const navigate = useNavigate();
   const [store, setStore] = useState<Store>(null!);
+
+  const handleLoading = (isLoading: boolean) => {
+    setStore((store) => {
+      return { ...store, isLoading };
+    });
+  };
 
   const loadUsers = async () => {
     try {
@@ -142,15 +150,18 @@ export const StoreContextProvider = ({ children }: any) => {
 
   const changeProfile = async (user: FormData) => {
     try {
+      handleLoading(true);
       const response = await (await axios.put(url + "/auth/me", user)).data;
       toast.success("Profile changed successfully");
-      navigate(`/profile`);
+      reloadUser();
     } catch (error: any) {
       toast.error(
         error.response?.data?.error ||
           error.response?.data?.message ||
           "Something went wrong"
       );
+    } finally {
+      handleLoading(false);
     }
   };
 
