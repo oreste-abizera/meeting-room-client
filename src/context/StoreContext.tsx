@@ -33,6 +33,8 @@ interface StoreContextInterface {
   rejectBooking: (bookingId: string) => void;
   deleteBuilding: (buildingId: string) => void;
   editBuilding: (buildingId: string, building: FormData) => void;
+  deletePlace: (placeId: string) => void;
+  editPlace: (placeId: string, place: FormData) => void;
 }
 
 const StoreContext = createContext<StoreContextInterface>(null!);
@@ -87,10 +89,12 @@ export const StoreContextProvider = ({ children }: any) => {
 
   const addBuilding = async (building: FormData) => {
     try {
+      handleLoading(true);
       const response = await (
         await axios.post(url + "/buildings", building)
       ).data;
       toast.success("Building added successfully");
+      handleLoading(false);
       navigate("/buildings");
     } catch (error: any) {
       toast.error(
@@ -98,13 +102,17 @@ export const StoreContextProvider = ({ children }: any) => {
           error.response?.data?.message ||
           "Something went wrong"
       );
+    } finally {
+      handleLoading(false);
     }
   };
 
   const addPlace = async (place: FormData) => {
     try {
+      handleLoading(true);
       const response = await (await axios.post(url + "/places", place)).data;
       toast.success("Place added successfully");
+      handleLoading(false);
       navigate(`/buildings/${place.get("building")}/places`);
     } catch (error: any) {
       toast.error(
@@ -112,6 +120,8 @@ export const StoreContextProvider = ({ children }: any) => {
           error.response?.data?.message ||
           "Something went wrong"
       );
+    } finally {
+      handleLoading(false);
     }
   };
 
@@ -129,10 +139,12 @@ export const StoreContextProvider = ({ children }: any) => {
 
   const bookPlace = async (booking: any) => {
     try {
+      handleLoading(true);
       const response = await (
         await axios.post(url + "/bookings", booking)
       ).data;
       toast.success("Place booked successfully");
+      handleLoading(false);
       navigate(`/bookings`);
     } catch (error: any) {
       toast.error(
@@ -140,6 +152,8 @@ export const StoreContextProvider = ({ children }: any) => {
           error.response?.data?.message ||
           "Something went wrong"
       );
+    } finally {
+      handleLoading(false);
     }
   };
 
@@ -234,7 +248,48 @@ export const StoreContextProvider = ({ children }: any) => {
       ).data;
       toast.success("Building edited successfully");
       loadBuildings();
+      handleLoading(false);
       navigate(`/buildings`);
+    } catch (error: any) {
+      toast.error(
+        error.response?.data?.error ||
+          error.response?.data?.message ||
+          "Something went wrong"
+      );
+    } finally {
+      handleLoading(false);
+    }
+  };
+
+  const deletePlace = async (placeId: string) => {
+    try {
+      handleLoading(true);
+      const response = await (
+        await axios.delete(url + "/places/" + placeId)
+      ).data;
+      toast.success("Place deleted successfully");
+      loadPlaces();
+    } catch (error: any) {
+      toast.error(
+        error.response?.data?.error ||
+          error.response?.data?.message ||
+          "Something went wrong"
+      );
+    } finally {
+      handleLoading(false);
+    }
+  };
+
+  const editPlace = async (placeId: string, place: FormData) => {
+    try {
+      handleLoading(true);
+      const response = await (
+        await axios.put(url + "/places/" + placeId, place)
+      ).data;
+      toast.success("Place edited successfully");
+      loadPlaces();
+      handleLoading(false);
+      navigate(`/buildings/${place.get("building")}/places`);
     } catch (error: any) {
       toast.error(
         error.response?.data?.error ||
@@ -265,6 +320,8 @@ export const StoreContextProvider = ({ children }: any) => {
         rejectBooking,
         deleteBuilding,
         editBuilding,
+        deletePlace,
+        editPlace,
       }}
     >
       {children}

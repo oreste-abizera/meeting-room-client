@@ -127,7 +127,7 @@ const BuildingForm = ({ edit, id, building: currentBuilding }: Props) => {
       {file && <img className="h-32" src={file as string} alt="building" />}
 
       <Button type="submit" className="mt-4" disabled={store?.isLoading}>
-        {store?.isLoading ? "Loading..." : edit ? "Save Changes" : "Submit"}
+        {store?.isLoading ? "Wait..." : edit ? "Save Changes" : "Submit"}
       </Button>
     </form>
   );

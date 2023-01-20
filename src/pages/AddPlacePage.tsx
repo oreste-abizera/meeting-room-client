@@ -1,10 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import BuildingForm from "../components/BuildingForm";
-import BuildingsList from "../components/BuildingsList";
-import Button from "../components/Button";
 import PlaceForm from "../components/PlaceForm";
-import StoreContext from "../context/StoreContext";
 import DashboardLayout from "../layouts/DashboardLayout";
 
 type Props = {};

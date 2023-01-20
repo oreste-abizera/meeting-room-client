@@ -56,7 +56,8 @@ const BuildingsList = (props: Props) => {
   };
 
   const deleteHandler = (id: string) => {
-    deleteBuilding(id);
+    if (confirm("Are you sure you want to delete this building?"))
+      deleteBuilding(id);
   };
 
   return (

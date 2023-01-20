@@ -1,14 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import StoreContext from "../context/StoreContext";
+import { Place } from "../types";
 import Button from "./Button";
 import Input from "./reusable/Input";
 
 type Props = {
   buildingId: string;
+  edit?: boolean;
+  currentPlace?: Place;
+  placeId?: string;
 };
 
-const PlaceForm = ({ buildingId }: Props) => {
-  const { addPlace } = useContext(StoreContext);
+const PlaceForm = ({ buildingId, edit, currentPlace, placeId }: Props) => {
+  const { addPlace, editPlace, store } = useContext(StoreContext);
   const [file, setfile] = React.useState<string | ArrayBuffer | null>();
   const [photoFile, setPhotoFile] = React.useState<File | null>(null);
 
@@ -31,9 +35,13 @@ const PlaceForm = ({ buildingId }: Props) => {
     formData.append("floor", place.floor + "");
     formData.append("description", place.description);
     formData.append("building", buildingId);
-    const photoToBlob = new Blob([photoFile || ""], { type: "image/jpeg" });
-    formData.append("picture", photoToBlob);
-    addPlace(formData);
+    if (!edit) {
+      const photoToBlob = new Blob([photoFile || ""], { type: "image/jpeg" });
+      formData.append("picture", photoToBlob);
+      addPlace(formData);
+    } else {
+      editPlace(placeId || "", formData);
+    }
   };
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,6 +61,17 @@ const PlaceForm = ({ buildingId }: Props) => {
       reader.readAsDataURL(tempFile);
     }
   };
+
+  useEffect(() => {
+    if (edit && currentPlace) {
+      setPlace({
+        name: currentPlace.name as string,
+        location: currentPlace.location as string,
+        floor: currentPlace.floor as number,
+        description: currentPlace.description as string,
+      });
+    }
+  }, [currentPlace, edit]);
 
   return (
     <form
@@ -94,19 +113,21 @@ const PlaceForm = ({ buildingId }: Props) => {
         value={place.description}
         onChange={handleChange}
       />
-      <Input
-        label={"Image"}
-        placeholder={"Image of place"}
-        name={"image"}
-        type={"file"}
-        required={true}
-        onChange={handleFile}
-      />
+      {!edit && (
+        <Input
+          label={"Image"}
+          placeholder={"Image of place"}
+          name={"image"}
+          type={"file"}
+          required={true}
+          onChange={handleFile}
+        />
+      )}
 
       {file && <img className="h-32" src={file as string} alt="place" />}
 
-      <Button type="submit" className="mt-4">
-        Submit
+      <Button type="submit" className="mt-4" disabled={store?.isLoading}>
+        {store?.isLoading ? "Wait..." : edit ? "Save Changes" : "Add"}
       </Button>
     </form>
   );

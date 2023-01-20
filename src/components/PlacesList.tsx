@@ -10,7 +10,7 @@ type Props = {
 
 const PlacesList = ({ id }: Props) => {
   const navigate = useNavigate();
-  const { store } = useContext(StoreContext);
+  const { store, deletePlace } = useContext(StoreContext);
   const data = (store?.places || [])
     .filter((place) => place.building._id === id)
     .map((place) => {
@@ -52,7 +52,24 @@ const PlacesList = ({ id }: Props) => {
       },
     },
   ];
-  return <Table columns={columns} data={data} showActions={true}></Table>;
+
+  const editHandler = (id: string) => {
+    navigate(`/places/${id}/edit`);
+  };
+
+  const deleteHandler = (id: string) => {
+    if (confirm("Are you sure you want to delete this place?")) deletePlace(id);
+  };
+
+  return (
+    <Table
+      columns={columns}
+      data={data}
+      showActions={true}
+      handler1={editHandler}
+      handler2={deleteHandler}
+    ></Table>
+  );
 };
 
 export default PlacesList;

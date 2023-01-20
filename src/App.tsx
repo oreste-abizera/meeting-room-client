@@ -12,6 +12,7 @@ import PlacesPage from "./pages/PlacesPage";
 import AddPlacePage from "./pages/AddPlacePage";
 import UserSettingsPage from "./pages/UserSettingsPage";
 import EditBuildingPage from "./pages/EditBuildingPage";
+import EditPlacePage from "./pages/EditPlacePage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <Route path="/buildings/:id/edit" element={<EditBuildingPage />} />
       <Route path="/buildings/:id/places" element={<PlacesPage />} />
       <Route path="/buildings/:id/add-place" element={<AddPlacePage />} />
+      <Route path="/places/:placeId/edit" element={<EditPlacePage />} />
       <Route path="/users" element={<UsersPage />} />
       <Route path="/bookings" element={<BookingsPage />} />
       <Route path="/settings" element={<UserSettingsPage />} />
