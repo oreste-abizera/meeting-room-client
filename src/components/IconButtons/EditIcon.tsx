@@ -1,13 +1,16 @@
 import React from "react";
 
-type Props = {};
+type Props = {
+  onClick?: () => void;
+};
 
-const EditIcon = (props: Props) => {
+const EditIcon = ({ onClick }: Props) => {
   return (
     <button
       className="align-bottom inline-flex items-center justify-center cursor-pointer leading-5 transition-colors duration-150 font-medium focus:outline-none text-gray-600 dark:text-gray-400 focus:outline-none border border-transparent active:bg-transparent hover:bg-gray-100 focus:shadow-outline-gray dark:hover:bg-gray-500 dark:hover:text-gray-300 dark:hover:bg-opacity-10"
       type="button"
       aria-label="Edit"
+      onClick={onClick}
     >
       <svg
         fill="currentColor"

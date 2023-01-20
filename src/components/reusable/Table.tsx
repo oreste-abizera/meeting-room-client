@@ -1,6 +1,8 @@
 import React from "react";
+import ApproveIcon from "../IconButtons/ApproveIcon";
 import DeleteIcon from "../IconButtons/DeleteIcon";
 import EditIcon from "../IconButtons/EditIcon";
+import RejectIcon from "../IconButtons/RejectIcon";
 
 type Props = {
   columns: Array<{
@@ -10,9 +12,19 @@ type Props = {
   }>;
   data: Array<any>;
   showActions?: boolean;
+  approveActions?: boolean;
+  handler1?: (id: string) => void;
+  handler2?: (id: string) => void;
 };
 
-const Table = ({ data, columns, showActions }: Props) => {
+const Table = ({
+  data,
+  columns,
+  showActions,
+  approveActions,
+  handler1,
+  handler2,
+}: Props) => {
   return (
     <div className="w-full overflow-hidden rounded-lg shadow-xs mb-8">
       <div className="w-full overflow-x-auto">
@@ -51,14 +63,33 @@ const Table = ({ data, columns, showActions }: Props) => {
                   {showActions && (
                     <td className="px-4 py-3">
                       <div className="flex items-center space-x-4">
-                        <EditIcon />
-                        <DeleteIcon />
+                        {approveActions ? (
+                          <RejectIcon onClick={() => handler1?.(item._id)} />
+                        ) : (
+                          <EditIcon onClick={() => handler1?.(item._id)} />
+                        )}
+                        {approveActions ? (
+                          <ApproveIcon onClick={() => handler2?.(item._id)} />
+                        ) : (
+                          <DeleteIcon onClick={() => handler2?.(item._id)} />
+                        )}
                       </div>
                     </td>
                   )}
                 </tr>
               );
             })}
+
+            {data.length === 0 && (
+              <tr>
+                <td
+                  className="px-4 py-3 text-left"
+                  colSpan={columns.length + (showActions ? 2 : 0)}
+                >
+                  No data found
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

@@ -29,6 +29,8 @@ interface StoreContextInterface {
   bookPlace: (booking: any) => void;
   getCurrentUser: () => Promise<UserDTO>;
   changeProfile: (user: FormData) => void;
+  approveBooking: (bookingId: string) => void;
+  rejectBooking: (bookingId: string) => void;
 }
 
 const StoreContext = createContext<StoreContextInterface>(null!);
@@ -165,6 +167,44 @@ export const StoreContextProvider = ({ children }: any) => {
     }
   };
 
+  const approveBooking = async (bookingId: string) => {
+    try {
+      handleLoading(true);
+      const response = await (
+        await axios.put(url + "/bookings/" + bookingId + "/approve")
+      ).data;
+      toast.success("Booking approved successfully");
+      loadBookings();
+    } catch (error: any) {
+      toast.error(
+        error.response?.data?.error ||
+          error.response?.data?.message ||
+          "Something went wrong"
+      );
+    } finally {
+      handleLoading(false);
+    }
+  };
+
+  const rejectBooking = async (bookingId: string) => {
+    try {
+      handleLoading(true);
+      const response = await (
+        await axios.put(url + "/bookings/" + bookingId + "/reject")
+      ).data;
+      toast.success("Booking rejected successfully");
+      loadBookings();
+    } catch (error: any) {
+      toast.error(
+        error.response?.data?.error ||
+          error.response?.data?.message ||
+          "Something went wrong"
+      );
+    } finally {
+      handleLoading(false);
+    }
+  };
+
   return (
     <StoreContext.Provider
       value={{
@@ -180,6 +220,8 @@ export const StoreContextProvider = ({ children }: any) => {
         bookPlace,
         getCurrentUser,
         changeProfile,
+        approveBooking,
+        rejectBooking,
       }}
     >
       {children}

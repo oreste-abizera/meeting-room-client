@@ -6,7 +6,7 @@ import Table from "./reusable/Table";
 type Props = {};
 
 const BookingsList = (props: Props) => {
-  const { store } = useContext(StoreContext);
+  const { store, approveBooking, rejectBooking } = useContext(StoreContext);
   const { isAdmin } = useContext(AppContext);
   const [activeTab, setActiveTab] = React.useState(1);
   const data = (store?.bookings || []).map((booking) => {
@@ -73,6 +73,18 @@ const BookingsList = (props: Props) => {
     },
   ];
 
+  const approveHandler = (id: string) => {
+    if (confirm("Are you sure you want to approve this booking?")) {
+      approveBooking(id);
+    }
+  };
+
+  const rejectHandler = (id: string) => {
+    if (confirm("Are you sure you want to reject this booking?")) {
+      rejectBooking(id);
+    }
+  };
+
   const changeActiveTab = (index: number) => {
     setActiveTab(index);
   };
@@ -118,7 +130,10 @@ const BookingsList = (props: Props) => {
       <Table
         columns={columns}
         data={displayedData}
-        showActions={isAdmin}
+        showActions={isAdmin && activeTab === 1}
+        approveActions={true}
+        handler1={rejectHandler}
+        handler2={approveHandler}
       ></Table>
     </>
   );
