@@ -7,9 +7,9 @@ type Props = {};
 
 const BookingsList = (props: Props) => {
   const { store, approveBooking, rejectBooking } = useContext(StoreContext);
-  const { isAdmin } = useContext(AppContext);
+  const { isAdmin, user } = useContext(AppContext);
   const [activeTab, setActiveTab] = React.useState(1);
-  const data = (store?.bookings || []).map((booking) => {
+  let data = (store?.bookings || []).map((booking) => {
     return {
       ...booking,
       names: `${booking.user.firstName} ${booking.user.lastName}`,
@@ -22,6 +22,10 @@ const BookingsList = (props: Props) => {
       endTime: new Date(booking.endTime).toLocaleString(),
     };
   });
+
+  data = isAdmin
+    ? data
+    : data.filter((booking) => booking.user._id === user?.info._id);
 
   const columns = [
     {
