@@ -8,7 +8,8 @@ type Props = {};
 
 const DashboardBanner = (props: Props) => {
   const navigate = useNavigate();
-  const { isAdmin } = useContext(AppContext);
+  const context = useContext(AppContext);
+  const isAdmin = context?.isAdmin;
   return (
     <div
       className="bg-[#363740] bg-opacity-90 rounded-[8px] h-[60px] w-full flex items-center justify-between px-2 lg:px-[16px] cursor-pointer"

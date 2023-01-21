@@ -10,7 +10,9 @@ type Props = {};
 
 const DashboardPage = (props: Props) => {
   const { loadStatistics, loadBuildings } = useContext(StoreContext);
-  const { isAdmin } = useContext(AppContext);
+  const context = useContext(AppContext);
+
+  const isAdmin = context?.isAdmin;
 
   useEffect(() => {
     if (isAdmin) {
