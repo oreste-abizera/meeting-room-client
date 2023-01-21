@@ -9,8 +9,6 @@ const AddPlacePage = (props: Props) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  console.log("here");
-
   return (
     <DashboardLayout title="Places">
       <div className="px-1 lg:px-4">

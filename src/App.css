@@ -1,5 +1,5 @@
 .animated-sideview {
-  transition: left 1s ease-in-out;
+  transition: left 0.5s ease-in-out;
 }
 
 .sidebar-link svg,

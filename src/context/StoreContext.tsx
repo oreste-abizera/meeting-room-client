@@ -62,7 +62,6 @@ export const StoreContextProvider = ({ children }: any) => {
   const loadBuildings = async () => {
     try {
       const response = await (await axios.get(url + "/buildings")).data;
-      console.log("first", response.data);
       setStore({ ...store, buildings: response.data });
     } catch (error) {
       setStore({ ...store, error });

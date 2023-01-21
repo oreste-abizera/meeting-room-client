@@ -14,7 +14,6 @@ const DashboardLayout = ({ children, title }: Props) => {
   const { isLoggedIn, user } = useContext(AppContext) || {};
 
   useEffect(() => {
-    console.log(isLoggedIn, user);
     if (!isLoggedIn) {
       navigate("/");
     }
