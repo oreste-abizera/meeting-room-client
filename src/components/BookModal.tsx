@@ -8,7 +8,7 @@ type Props = {
 };
 
 const BookModal = ({ cancel, place: placeId }: Props) => {
-  const { bookPlace } = useContext(StoreContext);
+  const { bookPlace, store } = useContext(StoreContext);
   const [values, setValues] = useState({
     startTime: "",
     endTime: "",
@@ -62,8 +62,9 @@ const BookModal = ({ cancel, place: placeId }: Props) => {
         <button
           type="submit"
           className="flex items-center gap-2 py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 mr-2"
+          disabled={store?.isLoading}
         >
-          <FaPlus /> Book
+          <FaPlus /> {store?.isLoading ? "Wait..." : "Book"}
         </button>
       </div>
     </form>
