@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import ApproveIcon from "../IconButtons/ApproveIcon";
 import DeleteIcon from "../IconButtons/DeleteIcon";
 import EditIcon from "../IconButtons/EditIcon";
@@ -8,7 +8,7 @@ type Props = {
   columns: Array<{
     Header: string;
     accessor: string;
-    customCell?: (row: any) => void;
+    customCell?: (row: any) => ReactNode;
   }>;
   data: Array<any>;
   showActions?: boolean;
