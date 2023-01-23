@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { FaPlus, FaTimes } from "react-icons/fa";
-import StoreContext from "../context/StoreContext";
 import { Place } from "../types";
 
 type Props = {

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { FaArrowRight, FaEye } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import StoreContext from "../context/StoreContext";
 import PlaceModal from "./PlaceModal";
