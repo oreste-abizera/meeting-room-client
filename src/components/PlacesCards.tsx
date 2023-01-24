@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import StoreContext from "../context/StoreContext";
 import BookModal from "./BookModal";
 import Button from "./Button";
+import LockIcon from "./IconButtons/LockIcon";
 import Modal from "./reusable/Modal";
 
 type Props = {
@@ -17,7 +18,7 @@ const PlacesCards = ({ id }: Props) => {
   const [selectedPlace, setSelectedPlace] = React.useState<any>(null);
 
   return (
-    <div className="px-1 lg:px-4 flex flex-wrap gap-y-4">
+    <div className="px-1 lg:px-4 flex flex-wrap justify-between gap-y-4">
       <Modal
         visible={selectedPlace !== null}
         onClose={() => setSelectedPlace(null)}
@@ -37,22 +38,16 @@ const PlacesCards = ({ id }: Props) => {
             style={{ backgroundImage: `url(${place.images[0]?.image_url})` }}
             title={place.name as string}
           ></div>
-          <div className="flex-1 border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+          <div className="flex-1 border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal dark:bg-[#1f2124] dark:text-[#dcddde] dark:border-[#2f3136]">
             <div className="mb-8">
-              <p className="text-xs text-gray-600 flex items-center">
-                <svg
-                  className="fill-current text-gray-500 w-3 h-3 mr-2"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
-                </svg>
+              <p className="text-xs text-gray-600 flex items-center dark:text-[#dcddde]">
+                <LockIcon />
                 Members only
               </p>
-              <div className="text-gray-900 font-bold text-xl mb-2">
+              <div className="text-gray-900 font-bold text-xl mb-2 dark:text-[#dcddde]">
                 {place.name}
               </div>
-              <p className="text-gray-700 text-base">
+              <p className="text-gray-700 text-base dark:text-[#dcddde]">
                 {`${place.building?.name} - Floor ${place.floor}`}
               </p>
             </div>
@@ -68,12 +63,14 @@ const PlacesCards = ({ id }: Props) => {
 
       {data.length === 0 && (
         <div className="flex w-full lg:w-[49%] lg:max-w-full">
-          <div className="flex-1 border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between">
+          <div className="flex-1 border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between dark:bg-[#1f2124] dark:text-[#dcddde] dark:border-[#2f3136]">
             <div className="mb-8">
-              <div className="text-gray-900 font-bold text-xl mb-2">
+              <div className="text-gray-900 font-bold text-xl mb-2 dark:text-[#dcddde]">
                 No places available
               </div>
-              <p className="text-gray-700 text-base">Please try again later</p>
+              <p className="text-gray-700 text-base dark:text-[#dcddde]">
+                Please try again later
+              </p>
             </div>
           </div>
         </div>

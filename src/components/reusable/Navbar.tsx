@@ -21,7 +21,7 @@ const Navbar = ({ handleToggle, title = "Overview" }: Props) => {
     <div className="py-[10px] px-2 lg:p-[30px] flex justify-between mb-[10px] lg:mb-0">
       <div className="flex items-center">
         <FaBars
-          className="mr-[16px] text-[#252733] text-[18px] lg:text-[24px] cursor-pointer lg:hidden"
+          className="mr-[16px] text-[#252733] text-[18px] lg:text-[24px] cursor-pointer lg:hidden dark:text-[#dcddde]"
           onClick={handleToggle}
         />
         <h1 className="text-[#252733] dark:text-[#dcddde] tracking-[0.3px] text-[18px] lg:text-[24px] leading-[30px] font-bold">

@@ -106,25 +106,25 @@ const BookingsList = (props: Props) => {
     <>
       <div className="flex mb-3 gap-2">
         <button
-          className={`w-56 bg-white text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow ${
-            activeTab === 1 ? "bg-gray-200" : ""
-          } dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600`}
+          className={`w-56 bg-white text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow dark:bg-gray-800 dark:bg-opacity-10 dark:text-gray-200 dark:border-gray-600 ${
+            activeTab === 1 ? "bg-gray-200 dark:bg-gray-100" : ""
+          }`}
           onClick={() => changeActiveTab(1)}
         >
           Pending
         </button>
         <button
-          className={`w-56 bg-white text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow ${
-            activeTab === 2 ? "bg-gray-200" : ""
-          } dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600`}
+          className={`w-56 bg-white text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow dark:bg-gray-800 dark:bg-opacity-10 dark:text-gray-200 dark:border-gray-600 ${
+            activeTab === 2 ? "bg-gray-200 dark:bg-gray-100" : ""
+          }`}
           onClick={() => changeActiveTab(2)}
         >
           Approved
         </button>
         <button
-          className={`w-56 bg-white text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow ${
-            activeTab === 3 ? "bg-gray-200" : ""
-          } dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600`}
+          className={`w-56 bg-white text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow  dark:bg-gray-800 dark:bg-opacity-10 dark:text-gray-200 dark:border-gray-600 ${
+            activeTab === 3 ? "bg-gray-200 dark:bg-gray-100" : ""
+          }`}
           onClick={() => changeActiveTab(3)}
         >
           Rejected

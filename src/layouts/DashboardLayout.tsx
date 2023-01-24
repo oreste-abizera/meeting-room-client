@@ -38,7 +38,7 @@ const DashboardLayout = ({ children, title }: Props) => {
         ></div>
         <Sidebar />
       </div>
-      <div className="w-full lg:w-[82.3%] h-full bg-[#F7F8FC] dark:bg-[#36393F]">
+      <div className="w-full lg:w-[82.3%] h-full overflow-y-auto bg-[#F7F8FC] dark:bg-[#36393F]">
         <Navbar handleToggle={handleToggle} title={title} />
         {children}
       </div>
