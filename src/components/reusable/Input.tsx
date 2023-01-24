@@ -20,7 +20,7 @@ const Input = ({
   onChange,
 }: Props) => {
   return (
-    <label className="block text-sm text-gray-700">
+    <label className="block text-sm text-gray-700 dark:text-gray-400">
       <span>{label}</span>
       <input
         className="block w-full text-sm focus:outline-none form-input leading-5 focus:border-purple-400 dark:border-gray-600 focus:shadow-outline-purple dark:focus:border-gray-600 dark:focus:shadow-outline-gray dark:bg-gray-700 mt-1"

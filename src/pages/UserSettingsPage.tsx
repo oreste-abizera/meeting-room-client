@@ -16,7 +16,7 @@ const UserSettingsPage = (props: Props) => {
   return (
     <DashboardLayout title="Settings">
       <div className="px-1 lg:px-4">
-        <h2 className="mb-4 text-lg font-semibold text-gray-600">
+        <h2 className="mb-4 text-lg font-semibold text-gray-600 dark:text-[#dcddde]">
           Edit Profile
         </h2>
         <ProfileForm />

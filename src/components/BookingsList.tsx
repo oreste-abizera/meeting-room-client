@@ -108,7 +108,7 @@ const BookingsList = (props: Props) => {
         <button
           className={`w-56 bg-white text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow ${
             activeTab === 1 ? "bg-gray-200" : ""
-          }`}
+          } dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600`}
           onClick={() => changeActiveTab(1)}
         >
           Pending
@@ -116,7 +116,7 @@ const BookingsList = (props: Props) => {
         <button
           className={`w-56 bg-white text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow ${
             activeTab === 2 ? "bg-gray-200" : ""
-          }`}
+          } dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600`}
           onClick={() => changeActiveTab(2)}
         >
           Approved
@@ -124,7 +124,7 @@ const BookingsList = (props: Props) => {
         <button
           className={`w-56 bg-white text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow ${
             activeTab === 3 ? "bg-gray-200" : ""
-          }`}
+          } dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600`}
           onClick={() => changeActiveTab(3)}
         >
           Rejected

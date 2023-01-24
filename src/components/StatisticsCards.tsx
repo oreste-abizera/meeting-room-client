@@ -43,7 +43,7 @@ const StatisticsCards = (props: Props) => {
         return (
           <div key={index} className="w-[48%] py-[12px]">
             <div
-              className="w-full bg-white h-[88px] p-[16px] min-w-0 rounded-lg overflow-hidden"
+              className="w-full bg-white h-[88px] p-[16px] min-w-0 rounded-lg overflow-hidden dark:bg-[#2F3136] dark:bg-opacity-90"
               style={{ boxShadow: "0 0 0 1px rgb(0 0 0 / 5%)" }}
             >
               <div className="flex items-center">
@@ -51,10 +51,10 @@ const StatisticsCards = (props: Props) => {
                   {item.icon}
                 </div>
                 <div>
-                  <p className="mb-2 text-sm font-medium text-gray-600">
+                  <p className="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
                     {item.title}
                   </p>
-                  <p className="text-lg font-semibold text-gray-700">
+                  <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
                     {item.value}
                   </p>
                 </div>

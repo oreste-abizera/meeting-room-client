@@ -70,7 +70,7 @@ const ProfileForm = (props: Props) => {
 
   return (
     <form
-      className="px-4 py-3 mb-8 bg-white rounded-lg shadow-md space-y-4"
+      className="px-4 py-3 mb-8 bg-white rounded-lg shadow-md space-y-4 dark:bg-gray-800"
       onSubmit={handleSubmit}
     >
       <div className="border border-gray-200 rounded-md p-10">
