@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useEffect, useState } from "react";
+import { createContext, PropsWithChildren, useState } from "react";
 import url from "../helpers/url";
 import { LoginInfo, RegisterInfo, StorageUser, User } from "../types";
 import { toast } from "react-hot-toast";
@@ -69,17 +69,12 @@ const AppContextProvider = ({ children }: PropsWithChildren<{}>) => {
         toast.success("Login successful");
       }
     } catch (error: any) {
-      console.log(error);
-      handleError(
+      const message =
         error?.response?.data?.error ||
-          error?.response?.data?.message ||
-          "Something went wrong"
-      );
-      toast.error(
-        error?.response?.data?.error ||
-          error?.response?.data?.message ||
-          "Something went wrong"
-      );
+        error?.response?.data?.message ||
+        "Something went wrong";
+      handleError(message);
+      toast.error(message);
     } finally {
       handleLoading(false);
     }
@@ -113,19 +108,13 @@ const AppContextProvider = ({ children }: PropsWithChildren<{}>) => {
         navigate("/");
       }
     } catch (error: any) {
-      console.log(error);
-      handleError(
+      const message =
         error?.response?.data?.error ||
-          error?.response?.data?.message ||
-          error?.message ||
-          "Something went wrong"
-      );
-      toast.error(
-        error.response?.data?.error ||
-          error.response?.data?.message ||
-          error?.message ||
-          "Something went wrong"
-      );
+        error?.response?.data?.message ||
+        error?.message ||
+        "Something went wrong";
+      handleError(message);
+      toast.error(message);
     } finally {
       handleLoading(false);
     }
@@ -181,17 +170,12 @@ const AppContextProvider = ({ children }: PropsWithChildren<{}>) => {
         setAuthorizationToken(user.token as string);
       }
     } catch (error: any) {
-      console.log(error);
-      handleError(
+      const message =
         error?.response?.data?.error ||
-          error?.response?.data?.message ||
-          "Something went wrong"
-      );
-      toast.error(
-        error?.response?.data?.error ||
-          error?.response?.data?.message ||
-          "Something went wrong"
-      );
+        error?.response?.data?.message ||
+        "Something went wrong";
+      handleError(message);
+      toast.error(message);
     } finally {
       handleLoading(false);
     }

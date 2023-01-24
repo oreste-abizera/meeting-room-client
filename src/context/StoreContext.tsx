@@ -50,6 +50,14 @@ export const StoreContextProvider = ({ children }: any) => {
     });
   };
 
+  const displayError = (error: any) => {
+    toast.error(
+      error.response?.data?.error ||
+        error.response?.data?.message ||
+        "Something went wrong"
+    );
+  };
+
   const loadUsers = async () => {
     try {
       const response = await (await axios.get(url + "/users")).data;
@@ -96,11 +104,7 @@ export const StoreContextProvider = ({ children }: any) => {
       handleLoading(false);
       navigate("/buildings");
     } catch (error: any) {
-      toast.error(
-        error.response?.data?.error ||
-          error.response?.data?.message ||
-          "Something went wrong"
-      );
+      displayError(error);
     } finally {
       handleLoading(false);
     }
@@ -114,11 +118,7 @@ export const StoreContextProvider = ({ children }: any) => {
       handleLoading(false);
       navigate(`/buildings/${place.get("building")}/places`);
     } catch (error: any) {
-      toast.error(
-        error.response?.data?.error ||
-          error.response?.data?.message ||
-          "Something went wrong"
-      );
+      displayError(error);
     } finally {
       handleLoading(false);
     }
@@ -146,11 +146,7 @@ export const StoreContextProvider = ({ children }: any) => {
       handleLoading(false);
       navigate(`/bookings`);
     } catch (error: any) {
-      toast.error(
-        error.response?.data?.error ||
-          error.response?.data?.message ||
-          "Something went wrong"
-      );
+      displayError(error);
     } finally {
       handleLoading(false);
     }
@@ -172,11 +168,7 @@ export const StoreContextProvider = ({ children }: any) => {
       toast.success("Profile changed successfully");
       reloadUser();
     } catch (error: any) {
-      toast.error(
-        error.response?.data?.error ||
-          error.response?.data?.message ||
-          "Something went wrong"
-      );
+      displayError(error);
     } finally {
       handleLoading(false);
     }
@@ -191,11 +183,7 @@ export const StoreContextProvider = ({ children }: any) => {
       toast.success("Booking approved successfully");
       loadBookings();
     } catch (error: any) {
-      toast.error(
-        error.response?.data?.error ||
-          error.response?.data?.message ||
-          "Something went wrong"
-      );
+      displayError(error);
     } finally {
       handleLoading(false);
     }
@@ -210,11 +198,7 @@ export const StoreContextProvider = ({ children }: any) => {
       toast.success("Booking rejected successfully");
       loadBookings();
     } catch (error: any) {
-      toast.error(
-        error.response?.data?.error ||
-          error.response?.data?.message ||
-          "Something went wrong"
-      );
+      displayError(error);
     } finally {
       handleLoading(false);
     }
@@ -229,11 +213,7 @@ export const StoreContextProvider = ({ children }: any) => {
       toast.success("Building deleted successfully");
       loadBuildings();
     } catch (error: any) {
-      toast.error(
-        error.response?.data?.error ||
-          error.response?.data?.message ||
-          "Something went wrong"
-      );
+      displayError(error);
     } finally {
       handleLoading(false);
     }
@@ -250,11 +230,7 @@ export const StoreContextProvider = ({ children }: any) => {
       handleLoading(false);
       navigate(`/buildings`);
     } catch (error: any) {
-      toast.error(
-        error.response?.data?.error ||
-          error.response?.data?.message ||
-          "Something went wrong"
-      );
+      displayError(error);
     } finally {
       handleLoading(false);
     }
@@ -269,11 +245,7 @@ export const StoreContextProvider = ({ children }: any) => {
       toast.success("Place deleted successfully");
       loadPlaces();
     } catch (error: any) {
-      toast.error(
-        error.response?.data?.error ||
-          error.response?.data?.message ||
-          "Something went wrong"
-      );
+      displayError(error);
     } finally {
       handleLoading(false);
     }
@@ -290,11 +262,7 @@ export const StoreContextProvider = ({ children }: any) => {
       handleLoading(false);
       navigate(`/buildings/${place.get("building")}/places`);
     } catch (error: any) {
-      toast.error(
-        error.response?.data?.error ||
-          error.response?.data?.message ||
-          "Something went wrong"
-      );
+      displayError(error);
     } finally {
       handleLoading(false);
     }
