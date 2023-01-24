@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import avatar from "../../static/images/avatar.png";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { FaBars } from "react-icons/fa";
@@ -12,7 +12,11 @@ type Props = {
 const Navbar = ({ handleToggle, title = "Overview" }: Props) => {
   const { isAdmin, user } = useContext(AppContext);
   const fullnames = user?.info?.firstName + " " + user?.info?.lastName;
-  const lightMode = true;
+
+  function handleClick() {
+    document.getElementById("root")?.classList.toggle("dark");
+  }
+
   return (
     <div className="py-[10px] px-2 lg:p-[30px] flex justify-between mb-[10px] lg:mb-0">
       <div className="flex items-center">
@@ -25,11 +29,16 @@ const Navbar = ({ handleToggle, title = "Overview" }: Props) => {
         </h1>
       </div>
       <div className="flex items-center">
-        {lightMode ? (
-          <MdDarkMode className="mr-0 lg:mr-[14px] text-[#252733] text-[18px] lg:text-[24px] cursor-pointer" />
-        ) : (
-          <MdLightMode className="mr-0 lg:mr-[14px] text-[#252733] text-[18px] lg:text-[24px] cursor-pointer" />
-        )}
+        <MdDarkMode
+          className="mr-0 lg:mr-[14px] text-[#252733] text-[18px] lg:text-[24px] cursor-pointer dark:hidden"
+          onClick={handleClick}
+        />
+
+        <MdLightMode
+          className="mr-0 lg:mr-[14px] text-[#252733] text-[18px] lg:text-[24px] cursor-pointer hidden dark:block"
+          onClick={handleClick}
+        />
+
         <div className="h-[22px] lg:h-[32px] border-[1px] border-[#DFE0EB] mx-2 lg:mx-[32px]"></div>
         <p className="mr-[14px] text-[#252733] tracking-[0.2px] text- text-[14px] leading-[20px] font-semibold">
           {fullnames}
